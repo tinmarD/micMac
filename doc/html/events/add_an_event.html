@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Add an Event &mdash; micmac 1.0.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="micmac 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Events" href="index.html"/>
+        <link rel="next" title="Tools" href="../tools/index.html"/>
+        <link rel="prev" title="Event window" href="event_window.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> micmac
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interface/index.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../signals/index.html">Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views/index.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../windows/index.html">Windows</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Events</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="event_window.html">Event window</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Add an Event</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#event-options">Event Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-an-event">Adding an event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#global-event">Global event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#channel-specific-event">Channel specific event</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#stacked-mode">Stacked Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spaced-mode">Spaced Mode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">micmac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Events</a> &raquo;</li>
+      
+    <li>Add an Event</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/events/add_an_event.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="add-an-event">
+<h1>Add an Event<a class="headerlink" href="#add-an-event" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="event-options">
+<h2>Event Options<a class="headerlink" href="#event-options" title="Permalink to this headline">¶</a></h2>
+<p>Before adding an event, the event type must be specified. To do this, go to <strong>Events&gt;Add&gt;Event Options</strong>. Adding an event when no type is given will automatically open this event options window.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/events_options.png" src="../_images/events_options.png" />
+<p class="caption"><span class="caption-text">Event options window</span></p>
+</div>
+<p>Event type can be set to an existing type or set to a new type by checking the <strong>New Type</strong> box. The channel option allow to specify whether the event is a global, defined on all channels, or the event is channel specific.</p>
+</div>
+<div class="section" id="adding-an-event">
+<h2>Adding an event<a class="headerlink" href="#adding-an-event" title="Permalink to this headline">¶</a></h2>
+<p>To add an event go to <strong>Events&gt;Add&gt;Add Event</strong> or use the shortcut <strong>Ctrl-A</strong>, a crosshair cursor then appears to select the limits of the event.</p>
+</div>
+<div class="section" id="global-event">
+<h2>Global event<a class="headerlink" href="#global-event" title="Permalink to this headline">¶</a></h2>
+<p>To add a global event, use the crosshair cursor to select the start and end of the event on the temporal axis.</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/events_add_global.png" src="../_images/events_add_global.png" />
+<p class="caption"><span class="caption-text">Adding a global event</span></p>
+</div>
+</div>
+<div class="section" id="channel-specific-event">
+<h2>Channel specific event<a class="headerlink" href="#channel-specific-event" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="stacked-mode">
+<h3>Stacked Mode<a class="headerlink" href="#stacked-mode" title="Permalink to this headline">¶</a></h3>
+<p>To add a channel specific event in <strong>Stacked Mode</strong>, both the channel and the temporal limits of the event have to be selected. To select the channel the cursor has to cross one and only one horizontal axis.</p>
+<div class="figure align-center" id="id3">
+<img alt="../_images/events_add_channel.png" src="../_images/events_add_channel.png" />
+<p class="caption"><span class="caption-text">Adding a channel specific event in &#8220;Stacked&#8221; mode</span></p>
+</div>
+</div>
+<div class="section" id="spaced-mode">
+<h3>Spaced Mode<a class="headerlink" href="#spaced-mode" title="Permalink to this headline">¶</a></h3>
+<p>To add a channel specific event in <strong>Spaced Mode</strong>, use the crosshair cursor to select the start and the end of the event on the temporal axis.</p>
+<div class="figure align-center" id="id4">
+<img alt="../_images/events_add_channel_spaced.png" src="../_images/events_add_channel_spaced.png" />
+<p class="caption"><span class="caption-text">Adding a channel specific event in &#8220;Spaced&#8221; mode</span></p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tools/index.html" class="btn btn-neutral float-right" title="Tools" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="event_window.html" class="btn btn-neutral" title="Event window" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, M. Deudon.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
