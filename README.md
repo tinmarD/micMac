@@ -5,6 +5,9 @@
 
 Author : Martin Deudon
 
+# Documentation
+The documentation is here : [doc](http://micmac.readthedocs.io/en/latest/)
+
 # Installation
 
 - Download *micmac*
