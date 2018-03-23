@@ -99,6 +99,7 @@ if 1%ismain
     cb_importmicmacevents= 'VI                  = importeventsfromfile  (VI,1);';
     cb_importdelphosevents='VI                  = importdelphoseventsfromfile  (VI, ALLSIG);';
     cb_importextevents  = '[VI, ALLWIN, ALLSIG] = pop_importexternalevents(VI,ALLWIN,ALLSIG);';
+    cb_rejectevents     = '[VI, ALLWIN, ALLSIG] = pop_rejectevents(VI,ALLWIN,ALLSIG);';
     cb_previousevent    = '[VI, ALLWIN, ALLSIG] = navigateevent         (VI, ALLWIN, ALLSIG, ''previous'');';
     cb_nextevent        = '[VI, ALLWIN, ALLSIG] = navigateevent         (VI, ALLWIN, ALLSIG, ''next'');';
     cb_event2sigevent   = '[VI, ALLWIN, ALLSIG] = pop_event2sigevent    (VI, ALLWIN, ALLSIG);';
@@ -157,6 +158,7 @@ if 1%ismain
     uimenu (events_import_m, 'Label', 'micMac events', 'Callback', cb_importmicmacevents);
     uimenu (events_import_m, 'Label', 'Delphos events', 'Callback', cb_importdelphosevents);
     uimenu (events_import_m, 'Label', 'external events', 'Callback', cb_importextevents);
+    uimenu (events_m, 'Label', 'Reject Events', 'Callback', cb_rejectevents, 'Separator', 'on');
     uimenu (events_m, 'Label', 'Previous Event (s)', 'Callback', cb_previousevent, 'Separator', 'on');
     uimenu (events_m, 'Label', 'Next Event (f)', 'Callback', cb_nextevent);
 %     uimenu (events_m, 'Label', 'Convert to Event Signal', 'Callback', cb_event2sigevent);

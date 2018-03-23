@@ -247,6 +247,7 @@ if ~VI.guiparam.hideevents
 
                     fill ([shdevc_tstarti(:),shdevc_tendi(:),shdevc_tendi(:),shdevc_tstarti(:)],-[ystart,ystart,yend,yend],...
                         shadowEvents(i).color,'EdgeColor',edgecolor,'FaceAlpha',vi_graphics('eventalphavalshadow'));
+
                 end
             end
         end

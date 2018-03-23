@@ -1,10 +1,11 @@
 function [childSigs, sigInd, childId] = getsigchildren (ALLSIG, parentId)
 % [childSigs, sigInd, childId] = getsigchildren (ALLSIG, parentId)
-%  Returns the children signals of a parent signal  
+%  Returns the children signals of a parent signal  .
+%       -> Use getsignal rather than this function
 %
 % INPUTS :
 %   - ALLSIG
-%   - parentId          : ID of the parent signal
+%   - parentId          : ID of the parent signal (scalar)
 %
 % OUTPUTS:  
 %   - childSigs         : Signal structures of children
