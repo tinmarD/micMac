@@ -81,7 +81,7 @@ switch Win.visumode
             dispinfo ('You must select only one channel');
             return;
         end
-        
+
     case 2 % spaced
         if strcmp(VI.guiparam.addevent.channel,'global');
             chanind = -1;

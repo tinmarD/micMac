@@ -212,7 +212,8 @@ if ~VI.guiparam.hideevents
         shadowEvents    = timeEvents (~owneventind);
         for i=1:length(shadowEvents)
             % If global event, and channel correspondence exist 
-            if shadowEvents(i).channelind == -1 && ~isempty(VI.chancorr{shadowEvents(i).rawparentid,viewrawparentpos})
+            shadowev_rawpidpos = find([ALLSIG.id] == shadowEvents(i).rawparentid);
+            if shadowEvents(i).channelind == -1 && ~isempty(VI.chancorr{shadowev_rawpidpos, viewrawparentpos})
                 shdevg_tstarti  = [shadowEvents(i).tpos];
                 shdevg_tstarti (shdevg_tstarti<ctimet-0.5*obstimet) = ctimet-0.5*obstimet;
                 shdevg_tendi    = [shadowEvents(i).tpos]+[shadowEvents(i).duration];
