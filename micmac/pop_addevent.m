@@ -19,11 +19,10 @@ xval = zeros(2,1);
 yval = zeros(2,1);
 [xval(1),yval(1)] = ginput (1);
 
-
 %- Get the view that was clicked
 viewFocusPos    = getfocusedviewpos(Win, gca);
 if isempty(viewFocusPos);
-    dispinfo('Add event by cliking on the axis');
+    dispinfo('Add event by clicking on the axis');
 end
 View    = Win.views(viewFocusPos);
 

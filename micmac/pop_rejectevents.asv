@@ -69,7 +69,7 @@ if ~isempty(results)
     reject      = ~results{2};
     sig_pos     = results{3};
     newsig      = results{4};
-    do_addview     = results{5};
+    addview     = results{5};
     evtype_sel  = evtypes_glob{evtype_pos};
     winpos      = results{6};
     viewpos     = str2double(results{7});
@@ -86,7 +86,7 @@ if ~isempty(results)
     events_sel = getevents(VI, 'type', evtype_sel, 'rawpid', rawsigid_sel);
     [VI, ALLWIN, ALLSIG] = rejectevents(VI, ALLWIN, ALLSIG, sigid_sel, events_sel, reject, newsig);
     % Add a view if asked 
-    if do_addview
+    if addview
         [VI, ALLWIN, ALLSIG] = addview(VI, ALLWIN, ALLSIG, winpos, ALLSIG(end).id, 't', viewpos);
     end
 
