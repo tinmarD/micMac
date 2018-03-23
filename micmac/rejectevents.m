@@ -2,7 +2,7 @@ function [VI, ALLWIN, ALLSIG] = rejectevents(VI, ALLWIN, ALLSIG, sigid, Events, 
 %[VI, ALLWIN, ALLSIG] = REJECTEVENTS(VI, ALLWIN, ALLSIG, sigid, Events, reject_mode, new_sig_mode)
 %   From the Signal defined by sigid, and from the Event list Events, 
 %   reject the time periods defined by the events. Or if the reject_mode is
-%   False, the time periods defined by the events are the only one ketp.
+%   False, the time periods defined by the events are the only one kept.
 %   A new signal is created if new_sig_mode is True. Otherwise the signal
 %   is replaced with the new one. 
 %   Events must have a duration

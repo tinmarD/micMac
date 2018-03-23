@@ -212,7 +212,7 @@ if ~VI.guiparam.hideevents
         shadowEvents    = timeEvents (~owneventind);
         for i=1:length(shadowEvents)
             % If global event, and channel correspondence exist 
-            shadowev_rawpidpos = [ALLSIG.id] == shadowEvents(i).rawparentid;
+            shadowev_rawpidpos = find([ALLSIG.id] == shadowEvents(i).rawparentid);
             if shadowEvents(i).channelind == -1 && ~isempty(VI.chancorr{shadowev_rawpidpos, viewrawparentpos})
                 shdevg_tstarti  = [shadowEvents(i).tpos];
                 shdevg_tstarti (shdevg_tstarti<ctimet-0.5*obstimet) = ctimet-0.5*obstimet;
@@ -247,7 +247,6 @@ if ~VI.guiparam.hideevents
 
                     fill ([shdevc_tstarti(:),shdevc_tendi(:),shdevc_tendi(:),shdevc_tstarti(:)],-[ystart,ystart,yend,yend],...
                         shadowEvents(i).color,'EdgeColor',edgecolor,'FaceAlpha',vi_graphics('eventalphavalshadow'));
-
                 end
             end
         end

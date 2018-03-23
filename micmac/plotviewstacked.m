@@ -212,8 +212,8 @@ if ~VI.guiparam.hideevents
         shadowEvents    = timeEvents (~owneventind);
         for i=1:length(shadowEvents)
             % If global event, and channel correspondence exist 
-            shadowev_rawpidpos = [ALLSIG.id] == shadowEvents(i).rawparentid;
-            if shadowEvents(i).channelind == -1 && ~isempty(VI.chancorr{shadowev_rawpidpos, viewrawparentpos})
+            shadowev_rawparentpos = find([ALLSIG.id] == shadowEvents(i).rawparentid);
+            if shadowEvents(i).channelind == -1 && ~isempty(VI.chancorr{shadowev_rawparentpos, viewrawparentpos})
                 shdevg_tstarti  = [shadowEvents(i).tpos];
                 shdevg_tstarti (shdevg_tstarti<ctimet-0.5*obstimet) = ctimet-0.5*obstimet;
                 shdevg_tendi    = [shadowEvents(i).tpos]+[shadowEvents(i).duration];
@@ -225,12 +225,13 @@ if ~VI.guiparam.hideevents
                     shadowEvents(i).color,'EdgeColor',edgecolor,'FaceAlpha',vi_graphics('eventalphavalshadow'));
 
             else
-                rawparentpos        = find([ALLSIG.id]==shadowEvents(i).rawparentid);
                 viewrawparentpos    = find([ALLSIG.id]==viewrawparentid);
-                if isempty(rawparentpos) || isempty(viewrawparentpos)
+                if isempty(shadowev_rawparentpos) || isempty(viewrawparentpos)
+                    continue;
+                elseif isempty(VI.chancorr{shadowev_rawparentpos,viewrawparentpos})
                     continue;
                 end
-                chancorri = VI.chancorr{rawparentpos,viewrawparentpos}(shadowEvents(i).channelind,:); 
+                chancorri = VI.chancorr{shadowev_rawparentpos,viewrawparentpos}(shadowEvents(i).channelind,:); 
                 % If shadow event, there are some corresponding channels
                 if chancorri(1)~=0      
                     if ismember(chansel,chancorri(1):chancorri(2))==0; continue; end;
