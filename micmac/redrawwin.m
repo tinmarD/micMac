@@ -246,7 +246,11 @@ if ~strcmp(Win.views(axPos).domain,'tf')
 elseif strcmp(Win.views(axPos).domain,'tf')
     %- Colormap
     colormap_m = uimenu (c,'Label','Colormap');
-    uimenu(colormap_m,'Label','Jet','Callback','colormap(''Jet'');VI.guiparam.colormap=''Jet'';');
+    uimenu(colormap_m,'Label','Viridis','Callback','colormap(''viridis'');VI.guiparam.colormap=''viridis'';');
+    uimenu(colormap_m,'Label','Plasma','Callback','colormap(''plasma'');VI.guiparam.colormap=''plasma'';');
+    uimenu(colormap_m,'Label','Inferno','Callback','colormap(''inferno'');VI.guiparam.colormap=''inferno'';');
+    uimenu(colormap_m,'Label','Fake Parula','Callback','colormap(''fake parula'');VI.guiparam.colormap=''fake parula'';');
+    uimenu(colormap_m,'Label','Jet','Callback','colormap(''Jet'');VI.guiparam.colormap=''Jet'';')
     uimenu(colormap_m,'Label','HSV','Callback','colormap(''HSV'');VI.guiparam.colormap=''HSV'';');
     uimenu(colormap_m,'Label','Hot','Callback','colormap(''Hot'');VI.guiparam.colormap=''Hot'';');
     uimenu(colormap_m,'Label','Cool','Callback','colormap(''Cool'');VI.guiparam.colormap=''Cool'';');

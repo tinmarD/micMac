@@ -59,6 +59,11 @@ f = figure('Visible','off','Position',figpos,'DockControls','off',...
             'CloseRequestFcn',['try;',fdelete_cb,'end;'],...
             'KeyPressFcn','','ResizeFcn',fresize_cb,'Color',vi_graphics('backgroundcolor'));
         
+% Set default colormap 
+% set(0,'DefaultFigureColormap', vi_defaultval('colormap'));
+colormap('viridis')
+
+        
 set(f,'WindowButtonDownFcn','[VI, ALLWIN] = vi_buttondowncb (VI, ALLWIN);');
 
 %- Keyboard shortcuts
