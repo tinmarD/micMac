@@ -21,11 +21,13 @@ if length(ALLSIG) < sig_pos
 end
 delphos_sig = ALLSIG(1);
 
-DELPHOS_SEP     = char(9);
+DELPHOS_SEP     = char(9); % Tab
 TYPE_COL        = 1;
 TIME_COL        = 3;
 DURATION_COL    = 4;
 CHANNAME_COL    = 5;
+% Number of header lines (For Delphos event might be 2, for Anywave only 1)
+N_HEADER_LINES  = 1;
 
 [filename, filepath] = uigetfile({'*.mrk;*.csv;*.txt'}, 'Select Events File');
 if ~ischar(filepath); return; end;
@@ -38,8 +40,8 @@ fileSize = ftell(fid);
 frewind(fid);
 % Read the whole file.
 data = fread(fid, fileSize, 'uint8');
-% Count number of line-feeds, thus events (2 lines of header)
-nevents  = sum(data == 10)-2;
+% Count number of line-feeds, thus events (minus N_HEADER_LINES)
+nevents  = sum(data == 10)-N_HEADER_LINES;
 % Close file
 fclose(fid);
 
@@ -50,8 +52,10 @@ eventlist = repmat (s_emptyevent(), nevents, 1);
 fid = fopen(fullfile(filepath,filename), 'r');
 
 % Read first 2 line (header)
-fgets(fid);
-fgets(fid);
+for i=1:N_HEADER_LINES
+    fgets(fid);
+end
+
 % Fill the array structure
 if ~isempty(VI.eventall)
     event_id_start = max([VI.eventall.id]);
@@ -79,6 +83,7 @@ for i=1:nevents
     eventlist(i).type = label_i;
     eventlist(i).tpos = str2double(eventvalue{TIME_COL});
     eventlist(i).duration = str2double(eventvalue{DURATION_COL});
+    try 
     channame = strtrim(eventvalue{CHANNAME_COL});
     channame = channame(1:end-1);
     channame = regexprep(channame,' ','');
