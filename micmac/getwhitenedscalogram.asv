@@ -50,24 +50,24 @@ for i=1:nScales
     lastValSel      = min(coeffSorted_i(end),quart3+1.5*iqr);
     coeffSel_i      = coeffSorted_i(coeffSorted_i>firstValSel & coeffSorted_i<lastValSel);
     %- Gaussian fit on hist of selected data
-%     [hist_i,bins_i] = hist(coeffSel_i,30);
-%     try
-% %         gaussFit 	= fit(bins_i(:),hist_i(:),'gauss1','TolX',1E-2);
+    [hist_i,bins_i] = hist(coeffSel_i,30);
+    try
+        gaussFit 	= fit(bins_i(:),hist_i(:),'gauss1','TolX',1E-2);
 %         gaussFit 	= fit(bins_i(:),hist_i(:),'gauss1');
-%         mean_i  	= gaussFit.b1;
-%         std_i     	= gaussFit.c1;
-%     catch 
-%         warning('Could not fit gaussian on data');
+        mean_i  	= gaussFit.b1;
+        std_i     	= gaussFit.c1;
+    catch 
+        warning('Could not fit gaussian on data');
         mean_i      = mean(coeffSel_i);
         std_i       = std(coeffSel_i);
-%     end
+    end
     %- Normalize data
     coeffNorm(i,:)  = (coeff_i-mean_i)./std_i;
-%       figure;
-%     [h, b] = hist(coeffSorted_i, 30);
-%     bar(b, h); hold on;
-%     plot([quart1, quart1], ylim, 'k');
-%     plot([quart3, quart3], ylim, 'k');
+      figure;
+    [h, b] = hist(coeffSorted_i, 15);
+    bar(b, h); hold on;
+    plot([quart1, quart1], ylim, 'k');
+    plot([quart3, quart3], ylim, 'k');
   
 %    
 end

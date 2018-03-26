@@ -10,7 +10,7 @@ The documentation is here : [doc](http://micmac.readthedocs.io/en/latest/)
 
 # Installation
 
-- Install [EEGLAB](https://sccn.ucsd.edu/eeglab/download.php) and it to the MATLAB path.
+- Install [EEGLAB](https://sccn.ucsd.edu/eeglab/download.php) and add it to the MATLAB path.
 - Install the Biosig toolbox from EEGLAB
 - Download *micmac*
 - Add *micmac* to the MATLAB path  

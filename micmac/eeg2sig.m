@@ -14,7 +14,7 @@ function Sig = eeg2sig(EEG,filepath,filename)
 
 Sig = s_emptysig();
 Sig.srate           = EEG.srate;
-Sig.type            = 'continuous'
+Sig.type            = 'continuous';
 Sig.data            = EEG.data;
 Sig.filename        = filename;
 Sig.filepath        = filepath;
