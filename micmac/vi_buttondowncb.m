@@ -46,7 +46,14 @@ if strcmp(get(gcbf,'SelectionType'),'normal') && (VI.cursor.type==2 || VI.cursor
                 VI.cursor.hfirstcursor(1)  = plot (xlim,[cury,cury],'c');
                 VI.cursor.hfirstcursor(2)  = plot (xlim,[cury+0.001*diff(ylim),cury+0.001*diff(ylim)],'b');
                 VI.cursor.firstcursorval   = cury;
-            end;
+%                 View = Win.views(viewnb);
+%                 if strcmp(View.domain,'tf') && View.params.logscale
+%                         pfmin   = View.params.pfmin; pfmax = View.params.pfmax; n_pfreqs = View.params.pfstep;
+%                         pfreqs  = logspace(log10(pfmin),log10(pfmax),n_pfreqs);
+%                         ind     = round((n_pfreqs-1)/(pfmax-pfmin) * (cury-pfmin) + 1);
+%                         VI.cursor.firstcursorval = pfreqs(max(1,min(ind, n_pfreqs)));
+%                 end
+            end
 
         end
         VI.cursor.haxis = gca;

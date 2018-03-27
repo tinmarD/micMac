@@ -32,7 +32,14 @@ if VI.cursor.type == 1
                 case 'f'
                     txt     = sprintf('f: %.1f Hz\nG: %.1f dB',curx,cury);
                 case 'tf'
-                    fval    = View.params.pfmin+cury*View.params.pfstep;
+                    if View.params.logscale
+                    	pfmin   = View.params.pfmin; pfmax = View.params.pfmax; n_pfreqs = View.params.pfstep;
+                        pfreqs  = logspace(log10(pfmin),log10(pfmax),n_pfreqs);
+                        ind     = round((n_pfreqs-1)/(pfmax-pfmin) * (cury-pfmin) + 1);
+                        fval    = pfreqs(max(1,min(ind, n_pfreqs)));
+                    else
+                        fval    = View.params.pfmin+cury*View.params.pfstep;
+                    end
                     txt     = sprintf('t:   %.4f s\nf:   %.1f Hz',curx,fval);
             end
     end

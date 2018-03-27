@@ -1,16 +1,21 @@
-function [ SC, pseudofreq, scales] = getwaveletscalogram(x, Fs, wname, pseudo_f_min, pseudo_f_max, pseudo_f_step, normMethod)
-% [ SC, pseudo_freq, scales] = getWaveletScalogram 
-%           (x, Fs, wname, pseudo_f_min, pseufo_f_max, pseudo_f_step, normMethod))
+function [ SC, pfreqs, scales] = getwaveletscalogram(x, Fs, wname, pf_min, pf_max, pf_step, log_scale, normMethod)
+% [ SC, pseudofreq, scales] = getWaveletScalogram 
+%           (x, Fs, wname, pf_min, pf_max, pf_step, log_scale, normMethod))
 
-pseudofreq          = pseudo_f_min:pseudo_f_step:pseudo_f_max;
+if log_scale
+    n_freqs     = pf_step;
+    pfreqs      = logspace(log10(pf_min),log10(pf_max),n_freqs);
+else
+    pfreqs      = pf_min:pf_step:pf_max;
+end
 if strcmp(wname,'morse')
     beta            = 6;
     gamma           = 20;
 %     wave_fc         = 0.3;
     wave_fc         = ((beta/gamma).^(1/gamma))/(2*pi);
-    scales          = wave_fc*Fs./pseudofreq;
+    scales          = wave_fc*Fs./pfreqs;
     nk              = 1;
-    morseScalogram  = zeros(length(pseudofreq),length(x),nk);
+    morseScalogram  = zeros(length(pfreqs),length(x),nk);
     for k=0:nk-1
         morseScalogram(:,:,k+1)=wscal55b(x,scales,beta,gamma,k,0.5);
     end
@@ -18,7 +23,7 @@ if strcmp(wname,'morse')
     coeffs          = sqrt(S);
 else
     wave_fc         = centfrq (wname);
-    scales          = wave_fc*Fs./pseudofreq;
+    scales          = wave_fc*Fs./pfreqs;
     [coeffs]        = cwt(x,scales,wname);
     S               = abs(coeffs.*coeffs);
 end

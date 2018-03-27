@@ -58,13 +58,7 @@ elseif VI.cursor.type == 3
                     'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');  
             case 'tf'
                 if View.params.logscale
-                    pfmin       = View.params.pfmin; pfmax = View.params.pfmax; n_pfreqs = View.params.pfstep;
-                    pfreqs      = logspace(log10(pfmin),log10(pfmax),n_pfreqs);
-                    ind_start   = round((n_pfreqs-1)/(pfmax-pfmin) * (VI.cursor.firstcursorval-pfmin) + 1);
-                    ind_end     = round((n_pfreqs-1)/(pfmax-pfmin) * (cury-pfmin) + 1);
-                    pfreq_diff  = abs(pfreqs(max(1,min(ind_end, n_pfreqs))) -  pfreqs(max(1,min(ind_start, n_pfreqs))));
-                    VI.cursor.hlastcursor(3) = text (curx,cury+0.05*diff(ylim),sprintf('%.4f Hz',pfreq_diff),...
-                        'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');  
+                    
                 else
                     VI.cursor.hlastcursor(3) = text (curx,cury+0.05*diff(ylim),sprintf('%.4f Hz',diffval*View.params.pfstep),...
                         'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');  

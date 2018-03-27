@@ -191,10 +191,9 @@ if ~isempty(results) || nargin>3
         ALLWIN(winnb).views(newviewpos).params.pfmin    = str2double(results{3});
         ALLWIN(winnb).views(newviewpos).params.pfmax    = str2double(results{4});
         ALLWIN(winnb).views(newviewpos).params.pfstep   = str2double(results{5});
-        ALLWIN(winnb).views(newviewpos).params.logscale = results{6};
-        ALLWIN(winnb).views(newviewpos).params.norm     = normMethods{results{7}};
-        VI.guiparam.colormap = colormaps{results{8}};
-        colormap(colormaps{results{8}});
+        ALLWIN(winnb).views(newviewpos).params.norm     = normMethods{results{6}};
+        VI.guiparam.colormap = colormaps{results{7}};
+        colormap(colormaps{results{7}});
     elseif nargin==3 && strcmp(domainstr,'frequency')
         psdMethods  = vi_defaultval('psd_methods');
         ALLWIN(winnb).views(newviewpos).params.method   = psdMethods{results{2}};
@@ -203,7 +202,9 @@ if ~isempty(results) || nargin>3
         ALLWIN(winnb).views(newviewpos).params.nfft     = str2double(results{5});
     end
     
-    ALLWIN = redrawwin(VI,ALLWIN,ALLSIG,winnb);    
+    
+    ALLWIN = redrawwin(VI,ALLWIN,ALLSIG,winnb);
+    
 end
 
 
