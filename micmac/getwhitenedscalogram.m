@@ -12,7 +12,6 @@ function [SC] = getwhitenedscalogram(coeffs, scales)
 % OUTPUTS :
 %   - SC                : Wavelet scalogram
 
-tic;
 %- Normalize CWT coeffs in L² (weighting function is 1/a and not 1/sqrt(a))
 coeffs          = coeffs./repmat(sqrt(scales(:)),1,size(coeffs,2));
 
@@ -30,8 +29,6 @@ else
 end
 
 SC               = abs(coeffNorm.*coeffNorm);
-toc;
-
 end
 
 

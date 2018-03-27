@@ -10,6 +10,12 @@ if isempty(ALLWIN(winnb).views); return; end;
 ALLWIN(winnb).axfocus   = get(gcf,'CurrentAxes');
 ALLWIN(winnb).viewfocus = getfocusedviewpos(ALLWIN(winnb));
 Win     = ALLWIN(winnb);
+%- Get the View
+axisnb  = find (Win.axlist==gca);
+if isempty(axisnb); return; end;
+viewnb  = rem (axisnb,length(Win.views));
+viewnb  = fastif(viewnb==0,length(Win.views),viewnb);
+View = Win.views(viewnb);
 
 %- If left mouse click and temporal or amplitude cursor activated 
 if strcmp(get(gcbf,'SelectionType'),'normal') && (VI.cursor.type==2 || VI.cursor.type==3);
@@ -32,16 +38,20 @@ if strcmp(get(gcbf,'SelectionType'),'normal') && (VI.cursor.type==2 || VI.cursor
             end            
             
         elseif Win.visumode == 2 % Spaced mode
-%             %- Get the View
-%             axisnb  = find (Win.axlist==gca);
-%             if isempty(axisnb); return; end;
-%             viewnb  = rem (axisnb,length(Win.views));
-%             viewnb  = fastif(viewnb==0,length(Win.views),viewnb);
             hold on;
             if VI.cursor.type == 2;
-                VI.cursor.hfirstcursor(1)  = plot ([curx,curx],ylim,'c');
-                VI.cursor.hfirstcursor(2)  = plot ([curx+0.0005*diff(xlim),curx+0.0005*diff(xlim)],ylim,'b');
-                VI.cursor.firstcursorval   = curx;
+                if strcmp(View.domain, 'f') && View.params.logscale
+%                     xoffset = 10.^(log10(curx)+0.001*(log10(View.params.fmax)-log10(View.params.fmin))) - curx;
+%                     VI.cursor.hfirstcursor(2)  = plot ([curx,curx],ylim,'c');
+%                     VI.cursor.hfirstcursor(1)  = plot ([curx+xoffset,curx+xoffset],ylim,'b');
+                    VI.cursor.hfirstcursor(1)  = plot ([curx,curx],ylim,'b');
+                    VI.cursor.hfirstcursor(2)  = plot ([curx,curx],ylim,'b');
+                    VI.cursor.firstcursorval   = curx;
+                else
+                    VI.cursor.hfirstcursor(1)  = plot ([curx,curx],ylim,'c');
+                    VI.cursor.hfirstcursor(2)  = plot ([curx+0.0005*diff(xlim),curx+0.0005*diff(xlim)],ylim,'b');
+                    VI.cursor.firstcursorval   = curx;
+                end
             elseif VI.cursor.type == 3;
                 VI.cursor.hfirstcursor(1)  = plot (xlim,[cury,cury],'c');
                 VI.cursor.hfirstcursor(2)  = plot (xlim,[cury+0.001*diff(ylim),cury+0.001*diff(ylim)],'b');

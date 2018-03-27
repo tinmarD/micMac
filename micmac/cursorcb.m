@@ -44,8 +44,14 @@ if VI.cursor.type == 1
             end
     end
     VI.cursor.hlastcursor     = [];
-    VI.cursor.hlastcursor (1) = text (curx-0.0015*diff(xlim),cury,'x');
-    VI.cursor.hlastcursor (2) = text (curx+0.01*diff(xlim),cury,txt,'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');
+    if strcmp(View.domain,'f') && View.params.logscale
+        xoffset = 10.^(log10(curx)+0.01*(log10(View.params.fmax)-log10(View.params.fmin))) - curx;
+        VI.cursor.hlastcursor (1) = text (curx-0.2*xoffset,cury,'x');
+        VI.cursor.hlastcursor (2) = text (curx+xoffset,cury,txt,'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');
+    else
+        VI.cursor.hlastcursor (1) = text (curx-0.0015*diff(xlim),cury,'x');
+        VI.cursor.hlastcursor (2) = text (curx+0.01*diff(xlim),cury,txt,'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');
+    end
 
 
 end

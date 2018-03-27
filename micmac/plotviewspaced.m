@@ -188,11 +188,22 @@ switch View.domain
                 pxx         = pyulear (data,vi_defaultval('pyulear_order'),nfft);
         end
         pxx = 10*log10(pxx);
-        plot (fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
+        if View.params.logscale
+            set(gca,'xscale','log')
+            semilogx(fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
+        else
+            set(gca,'xscale','linear')
+            plot(fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
+        end
         axis tight;  axis on; set(gca, 'Box','Off'); grid on;
         xlims = xlim; ylims = ylim;
-        text (xlims(1)+0.45*diff(xlims),ylims(2)-0.04*diff(ylims),'Power Spectrum');
-       
+        if View.params.logscale
+            f_log = log10(fvect(fminind:fmaxind));
+            xmid  = 10.^((f_log(end) + f_log(1))/2.25);
+            text(xmid,ylims(2)-0.04*diff(ylims),'Power Spectrum');
+        else
+            text(xlims(1)+0.45*diff(xlims),ylims(2)-0.04*diff(ylims),'Power Spectrum');
+        end       
 end
 set (gca,'Color',vi_graphics('plotbackgroundcolor'),'XColor',vi_graphics('xtickcolor'),'YColor',vi_graphics('ytickcolor'));
 

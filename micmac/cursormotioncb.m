@@ -11,7 +11,14 @@ currentpoint    = get (gca,'CurrentPoint');
 curx            = currentpoint(1,1);
 cury            = currentpoint(1,2);
 
-axes(VI.cursor.haxis);
+try
+    axes(VI.cursor.haxis);
+catch
+    % Could not find the axis - something has changed, remove the motion
+    % callback
+    set(gcbf,'WindowButtonMotionFcn','');
+    VI.cursor.inc = 0;
+end
 
 winnb   = find(cat(1,ALLWIN.figh)==gcbf);
 Win     = ALLWIN(winnb);
@@ -24,8 +31,13 @@ View    = ALLWIN(winnb).views(viewnb);
 %- Temporal cursor (or frequency)
 if VI.cursor.type == 2
     diffval         = abs(curx - VI.cursor.firstcursorval);
-    VI.cursor.hlastcursor(1) = plot ([curx,curx],ylim,'c');
-    VI.cursor.hlastcursor(2) = plot ([curx+0.0005*diff(xlim),curx+0.0005*diff(xlim)],ylim,'b');
+    if Win.visumode == 2 && strcmp(View.domain, 'f') && View.params.logscale
+        VI.cursor.hlastcursor(1) = plot ([curx,curx],ylim,'b');
+        VI.cursor.hlastcursor(2) = plot ([curx,curx],ylim,'b');
+    else
+        VI.cursor.hlastcursor(1) = plot ([curx,curx],ylim,'c');
+        VI.cursor.hlastcursor(2) = plot ([curx+0.0005*diff(xlim),curx+0.0005*diff(xlim)],ylim,'b');
+    end
     if Win.visumode == 2 && strcmp(View.domain,'f')
         VI.cursor.hlastcursor(3) = text (curx+0.01*diff(xlim),cury,sprintf('%.4f Hz',diffval),...
             'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');        

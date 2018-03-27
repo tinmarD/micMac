@@ -162,8 +162,10 @@ switch View.domain
         offset  = 0.5*diff(ylim)/length(scales);  
         yticks  = linspace(offset+ylims(1),offset+ylims(2),10);
         if View.params.logscale
-            n_pfreqs = View.params.pfstep
-            ind = (n_pfreqs-1)/(View.params.pfmax - View.params.pfmin)*(yticks - View.params.pfmin) + 1
+            n_pfreqs = View.params.pfstep;
+            ind = floor((n_pfreqs-1)/(View.params.pfmax - View.params.pfmin)*(yticks - View.params.pfmin) + 1);
+            ind(ind>n_pfreqs) = n_pfreqs;
+            ytick_label = round(pseudofreq(ind));
         else
             ytick_label = round(linspace(pseudofreq(1),pseudofreq(end),10));
         end
@@ -186,11 +188,20 @@ switch View.domain
                 pxx         = pyulear (data,vi_defaultval('pyulear_order'),nfft);
         end
         pxx = 10*log10(pxx);
-        plot (fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
+        if View.params.logscale
+            semilogx(fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
+        else
+            plot (fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
+        end
         axis tight;  axis on; set(gca, 'Box','Off'); grid on;
         xlims = xlim; ylims = ylim;
-        text (xlims(1)+0.45*diff(xlims),ylims(2)-0.04*diff(ylims),'Power Spectrum');
-       
+        if View.params.logscale
+            f_log = log10(fvect(fminind:fmaxind));
+            xmid  = 10.^f_log(round(length(f_log)/2));
+            text(xmid,ylims(2)-0.04*diff(ylims),'Power Spectrum');
+        else
+            text(xlims(1)+0.45*diff(xlims),ylims(2)-0.04*diff(ylims),'Power Spectrum');
+        end       
 end
 set (gca,'Color',vi_graphics('plotbackgroundcolor'),'XColor',vi_graphics('xtickcolor'),'YColor',vi_graphics('ytickcolor'));
 

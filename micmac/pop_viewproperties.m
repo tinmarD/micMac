@@ -49,7 +49,7 @@ if nargin==3
     
     switch domainstr
         case 'time';            geometry = {[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1],[1,2]};  
-        case 'frequency';       geometry = {[1,1],[1,1],[1,1],[1,1],[1,1],[1],[1,1],[1,1,1,1,1,1],[1,1],[1],[1,2]};
+        case 'frequency';       geometry = {[1,1],[1,1],[1,1],[1,1],[1,1],[1],[7,7,1],[2.3,2.3,2.3,2.3,2.3,2.3,1],[1,1],[1],[1,2]};
         case 'time-frequency';	geometry = {[1,1],[1,1],[1,1],[1,1],[1,1],[1],[7,7,1],[2.3,2.3,2.3,2.3,2.3,2.3,1],[1,1],[1,1],[1],[1,2]};
     end
     uilist=cell(1,length([geometry{:}]));
@@ -77,16 +77,19 @@ if nargin==3
     switch domainstr
         case 'frequency'
             methodPos   = find(strcmp(vi_defaultval('psd_methods'),View.params.method));
+            logScale    = View.params.logscale;
             uilist(11:end-5) = {
                 {},...
                 {'Style','text','String','Method :'},...
                 {'Style','popupmenu','String',vi_defaultval('psd_methods'),'value',methodPos},...
+                {'Style','text','String','Log'},...
                 {'Style','text','String','freq min :','tag','fmint'},...
                 {'Style','edit','String',num2str(View.params.fmin),'tag','fmin'},...
                 {'Style','text','String','freq max :','tag','fmaxt'},...
                 {'Style','edit','String',num2str(View.params.fmax),'tag','fmax',},...
                 {'Style','text','String','nfft:','tag','fstept'},...
-                {'Style','edit','String',num2str(View.params.nfft),'tag','fstep'}};
+                {'Style','edit','String',num2str(View.params.nfft),'tag','fstep'},...
+                {'Style','checkbox','tag','logcb','Value',logScale}};
             
         case 'time-frequency'
             wavePos     = find(strcmp(vi_defaultval('wavelet_names'),View.params.wname));
@@ -201,6 +204,7 @@ if ~isempty(results) || nargin>3
         ALLWIN(winnb).views(newviewpos).params.fmin     = str2double(results{3});
         ALLWIN(winnb).views(newviewpos).params.fmax     = str2double(results{4});
         ALLWIN(winnb).views(newviewpos).params.nfft     = str2double(results{5});
+        ALLWIN(winnb).views(newviewpos).params.logscale = results{6};
     end
     
     ALLWIN = redrawwin(VI,ALLWIN,ALLSIG,winnb);    

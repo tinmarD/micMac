@@ -49,7 +49,7 @@ if nargin==3
     
     switch domainstr
         case 'time';            geometry = {[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1],[1,2]};  
-        case 'frequency';       geometry = {[1,1],[1,1],[1,1],[1,1],[1,1],[1],[1,1],[1,1,1,1,1,1],[1,1],[1],[1,2]};
+        case 'frequency';       geometry = {[1,1],[1,1],[1,1],[1,1],[1,1],[1],[7,7,1],[2.3,2.3,2.3,2.3,2.3,2.3,1],[1,1],[1],[1,2]};
         case 'time-frequency';	geometry = {[1,1],[1,1],[1,1],[1,1],[1,1],[1],[7,7,1],[2.3,2.3,2.3,2.3,2.3,2.3,1],[1,1],[1,1],[1],[1,2]};
     end
     uilist=cell(1,length([geometry{:}]));
@@ -86,7 +86,8 @@ if nargin==3
                 {'Style','text','String','freq max :','tag','fmaxt'},...
                 {'Style','edit','String',num2str(View.params.fmax),'tag','fmax',},...
                 {'Style','text','String','nfft:','tag','fstept'},...
-                {'Style','edit','String',num2str(View.params.nfft),'tag','fstep'}};
+                {'Style','edit','String',num2str(View.params.nfft),'tag','fstep'},
+                {'Style','checkbox','tag','logcb','Value',logScale,'callback',cb_logcbcheck}};
             
         case 'time-frequency'
             wavePos     = find(strcmp(vi_defaultval('wavelet_names'),View.params.wname));
@@ -191,9 +192,10 @@ if ~isempty(results) || nargin>3
         ALLWIN(winnb).views(newviewpos).params.pfmin    = str2double(results{3});
         ALLWIN(winnb).views(newviewpos).params.pfmax    = str2double(results{4});
         ALLWIN(winnb).views(newviewpos).params.pfstep   = str2double(results{5});
-        ALLWIN(winnb).views(newviewpos).params.norm     = normMethods{results{6}};
-        VI.guiparam.colormap = colormaps{results{7}};
-        colormap(colormaps{results{7}});
+        ALLWIN(winnb).views(newviewpos).params.logscale = results{6};
+        ALLWIN(winnb).views(newviewpos).params.norm     = normMethods{results{7}};
+        VI.guiparam.colormap = colormaps{results{8}};
+        colormap(colormaps{results{8}});
     elseif nargin==3 && strcmp(domainstr,'frequency')
         psdMethods  = vi_defaultval('psd_methods');
         ALLWIN(winnb).views(newviewpos).params.method   = psdMethods{results{2}};
@@ -202,9 +204,7 @@ if ~isempty(results) || nargin>3
         ALLWIN(winnb).views(newviewpos).params.nfft     = str2double(results{5});
     end
     
-    
-    ALLWIN = redrawwin(VI,ALLWIN,ALLSIG,winnb);
-    
+    ALLWIN = redrawwin(VI,ALLWIN,ALLSIG,winnb);    
 end
 
 
