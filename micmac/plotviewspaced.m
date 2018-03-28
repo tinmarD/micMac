@@ -151,7 +151,7 @@ switch View.domain
         tfWin 	= tukeywin(length(tind),0.3)'; 
         dataw   = data.*tfWin;
         [SC, pseudofreq, scales] = getwaveletscalogram (dataw, Sig.srate, ...
-            View.params.wname, View.params.pfmin, View.params.pfmax, View.params.pfstep, View.params.logscale, View.params.norm);
+            View.params.wname, View.params.pfmin, View.params.pfmax, View.params.pfstep, View.params.logscale, View.params.norm, View.params.cyclemin, View.params.cyclemax);
         if View.params.logscale
             imagesc(tvect, pseudofreq, SC, 'HitTest','off', 'YData', pseudofreq);  
         else
@@ -165,6 +165,7 @@ switch View.domain
             n_pfreqs = View.params.pfstep;
             ind = floor((n_pfreqs-1)/(View.params.pfmax - View.params.pfmin)*(yticks - View.params.pfmin) + 1);
             ind(ind>n_pfreqs) = n_pfreqs;
+            ind(ind<=0) = 1;
             ytick_label = round(pseudofreq(ind));
         else
             ytick_label = round(linspace(pseudofreq(1),pseudofreq(end),10));

@@ -151,7 +151,7 @@ switch View.domain
         tfWin 	= tukeywin(length(tind),0.3)'; 
         dataw   = data.*tfWin;
         [SC, pseudofreq, scales] = getwaveletscalogram (dataw, Sig.srate, ...
-            View.params.wname, View.params.pfmin, View.params.pfmax, View.params.pfstep, View.params.logscale, View.params.norm);
+            View.params.wname, View.params.pfmin, View.params.pfmax, View.params.pfstep, View.params.logscale, View.params.norm, V);
         if View.params.logscale
             imagesc(tvect, pseudofreq, SC, 'HitTest','off', 'YData', pseudofreq);  
         else
@@ -189,15 +189,17 @@ switch View.domain
         end
         pxx = 10*log10(pxx);
         if View.params.logscale
+            set(gca,'xscale','log')
             semilogx(fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
         else
-            plot (fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
+            set(gca,'xscale','linear')
+            plot(fvect(fminind:fmaxind),pxx(fminind:fmaxind),'color',couleur);
         end
         axis tight;  axis on; set(gca, 'Box','Off'); grid on;
         xlims = xlim; ylims = ylim;
         if View.params.logscale
             f_log = log10(fvect(fminind:fmaxind));
-            xmid  = 10.^f_log(round(length(f_log)/2));
+            xmid  = 10.^((f_log(end) + f_log(1))/2.25);
             text(xmid,ylims(2)-0.04*diff(ylims),'Power Spectrum');
         else
             text(xlims(1)+0.45*diff(xlims),ylims(2)-0.04*diff(ylims),'Power Spectrum');

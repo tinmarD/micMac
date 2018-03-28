@@ -17,9 +17,7 @@ if strcmp(wname ,'cmor-var')
     else
         wav_cycles  = linspace(cycle_min, cycle_max, n_freqs);
     end
-    scalogram       = mm_morletscalogram(x, Fs, pfreqs, wav_cycles);
-    coeffs          = abs(scalogram);
-    S               = coeffs.^2;
+    S               = mm_morletscalogram(x, Fs, pfreqs, wav_cycles);
     scales          = pfreqs;
 elseif strcmp(wname,'morse')
     beta            = 6;
