@@ -68,7 +68,7 @@ elseif VI.cursor.type == 3
             case 'f'
                 VI.cursor.hlastcursor(3) = text (curx,cury+0.05*diff(ylim),sprintf('%.4f dB',diffval),...
                     'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');  
-            case 'tf'
+            case {'tf','ph'}
                 if View.params.logscale
                     pfmin       = View.params.pfmin; pfmax = View.params.pfmax; n_pfreqs = View.params.pfstep;
                     pfreqs      = logspace(log10(pfmin),log10(pfmax),n_pfreqs);

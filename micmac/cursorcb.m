@@ -31,7 +31,7 @@ if VI.cursor.type == 1
                     txt     = sprintf('t:  %.4f s\ny: %.1f uV',curx,cury);
                 case 'f'
                     txt     = sprintf('f: %.1f Hz\nG: %.1f dB',curx,cury);
-                case 'tf'
+                case {'tf','ph'}
                     if View.params.logscale
                     	pfmin   = View.params.pfmin; pfmax = View.params.pfmax; n_pfreqs = View.params.pfstep;
                         pfreqs  = logspace(log10(pfmin),log10(pfmax),n_pfreqs);

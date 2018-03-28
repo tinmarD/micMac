@@ -150,7 +150,7 @@ switch View.domain
 %         tfWin 	= hamming(length(tind))';
         tfWin 	= tukeywin(length(tind),0.3)'; 
         dataw   = data.*tfWin;
-        [SC, pseudofreq, scales] = getwaveletscalogram (dataw, Sig.srate, ...
+        [SC, pseudofreq, scales, ~] = getwaveletscalogram (dataw, Sig.srate, ...
             View.params.wname, View.params.pfmin, View.params.pfmax, View.params.pfstep, View.params.logscale, View.params.norm, View.params.cyclemin, View.params.cyclemax);
         if View.params.logscale
             imagesc(tvect, pseudofreq, SC, 'HitTest','off', 'YData', pseudofreq);  
@@ -160,6 +160,33 @@ switch View.domain
         axis('xy','tight');
         ylims   = ylim;
         offset  = 0.5*diff(ylim)/length(scales);  
+        yticks  = linspace(offset+ylims(1),offset+ylims(2),10);
+        if View.params.logscale
+            n_pfreqs = View.params.pfstep;
+            ind = floor((n_pfreqs-1)/(View.params.pfmax - View.params.pfmin)*(yticks - View.params.pfmin) + 1);
+            ind(ind>n_pfreqs) = n_pfreqs;
+            ind(ind<=0) = 1;
+            ytick_label = round(pseudofreq(ind));
+        else
+            ytick_label = round(linspace(pseudofreq(1),pseudofreq(end),10));
+        end
+        % Overlay horizontal lines
+        set (gca,'ygrid','on','xgrid','on','XColor',vi_graphics('tf_grid_color'),'YColor',vi_graphics('tf_grid_color'));
+        set (gca,'YTick',linspace(offset+ylims(1),offset+ylims(2),10),'YTickLabel',ytick_label); 
+    case 'ph'
+%         tfWin 	= tukeywin(length(tind),0.3)'; 
+%         dataw   = data.*tfWin;
+        dataw = data;
+        [~,pseudofreq,~,phaseMap] = getwaveletscalogram (dataw, Sig.srate, ...
+            View.params.wname, View.params.pfmin, View.params.pfmax, View.params.pfstep, View.params.logscale, 'None', View.params.cyclemin, View.params.cyclemax, 1);
+        if View.params.logscale
+            imagesc(tvect, pseudofreq, phaseMap, 'HitTest','off', 'YData', pseudofreq);  
+        else
+            imagesc(phaseMap,'XData',tvect,'HitTest','off');  
+        end        
+        axis('xy','tight');
+        ylims   = ylim;
+        offset  = 0.5*diff(ylim)/length(pseudofreq);  
         yticks  = linspace(offset+ylims(1),offset+ylims(2),10);
         if View.params.logscale
             n_pfreqs = View.params.pfstep;
@@ -204,7 +231,7 @@ switch View.domain
             text(xmid,ylims(2)-0.04*diff(ylims),'Power Spectrum');
         else
             text(xlims(1)+0.45*diff(xlims),ylims(2)-0.04*diff(ylims),'Power Spectrum');
-        end       
+        end                  
 end
 set (gca,'Color',vi_graphics('plotbackgroundcolor'),'XColor',vi_graphics('xtickcolor'),'YColor',vi_graphics('ytickcolor'));
 
@@ -213,7 +240,10 @@ textinter = get(0,'defaulttextinterpreter');
 set (0,'defaulttextinterpreter','none');
 set (gca, 'Units', 'pixels');
 axespospx = get (gca, 'Position');
-couleur   = fastif (strcmp(View.domain,'tf'),[0.85,0.85,0],[0,0,0]);
+if ismember(View.domain,{'t','f'}); couleur=[0,0,0];
+elseif strcmp(View.domain,'tf');    couleur=[0.85,0.85,0];
+elseif strcmp(View.domain,'ph');    couleur=[0.9,0.9,0.9];
+end
 text (10,axespospx(4)-8, [Sig.desc,'-',View.domain], 'units','pixels',...
     'fontangle','italic','fontsize',8,'Color',couleur);
 set (0,'defaulttextinterpreter',textinter);

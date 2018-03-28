@@ -1,6 +1,10 @@
-function [ SC, pfreqs, scales] = getwaveletscalogram(x, Fs, wname, pf_min, pf_max, pf_step, log_scale, normMethod, cycle_min, cycle_max)
+function [ SC, pfreqs, scales, phase] = getwaveletscalogram(x, Fs, wname, pf_min, pf_max, pf_step, log_scale, normMethod, cycle_min, cycle_max, return_phase)
 % [ SC, pseudofreq, scales] = getWaveletScalogram 
 %           (x, Fs, wname, pf_min, pf_max, pf_step, log_scale, normMethod cycle_min, cycle_max)
+if nargin==10
+    return_phase = 0;
+end
+phase = [];
 
 if log_scale
     n_freqs     = pf_step;
@@ -10,7 +14,6 @@ else
     n_freqs     = length(pfreqs);
 end
 
-
 if strcmp(wname ,'cmor-var')
     if log_scale
         wav_cycles  = logspace(log10(cycle_min),log10(cycle_max),n_freqs);
@@ -18,6 +21,9 @@ if strcmp(wname ,'cmor-var')
         wav_cycles  = linspace(cycle_min, cycle_max, n_freqs);
     end
     scalogram       = mm_morletscalogram(x, Fs, pfreqs, wav_cycles);
+    if return_phase
+        phase = angle(scalogram);
+    end
     coeffs          = abs(scalogram);
     S               = coeffs.^2;
     scales          = pfreqs;

@@ -219,7 +219,6 @@ if Win.visumode == 1 % stacked
     trueViewPos(axPos)          = [];
     viewposs = 1:nTemporalViews;
     viewposs(viewposs==axPos)   = [];
-    
 else
     viewposs = 1:nViews;
     viewposs(viewposs==axPos)         = [];
@@ -236,14 +235,14 @@ if ~isempty(viewposs)
 end
 
 %- Change color
-if ~strcmp(Win.views(axPos).domain,'tf')
+if strcmp(Win.views(axPos).domain,'t') || strcmp(Win.views(axPos).domain,'f')
     cb_changecolor = ['couleur = uisetcolor();',...
         '[VI ALLWIN ALLSIG] = pop_viewproperties (VI, ALLWIN, ALLSIG, 0, -1, couleur);'];
     cb_rainbowcolor= '[VI ALLWIN ALLSIG] = pop_viewproperties (VI, ALLWIN, ALLSIG, 0, -1, ''rainbow'');';
     color_m = uimenu(c,'Label','Color');
     uimenu (color_m,'Label','Change Color','Callback',cb_changecolor);
     uimenu (color_m,'Label','Rainbow','Callback',cb_rainbowcolor);
-elseif strcmp(Win.views(axPos).domain,'tf')
+elseif strcmp(Win.views(axPos).domain,'tf') || strcmp(Win.views(axPos).domain,'ph')
     %- Colormap
     colormap_m = uimenu (c,'Label','Colormap');
     uimenu(colormap_m,'Label','Viridis','Callback','colormap(''viridis'');VI.guiparam.colormap=''viridis'';');
