@@ -114,6 +114,7 @@ if 1%ismain
     cb_ripplelab_mni    = '[VI, ALLWIN, ALLSIG] = pop_ripplelab_mni     (VI, ALLWIN, ALLSIG);';
     cb_spikedetect_wave = '[VI, ALLWIN, ALLSIG] = pop_spikedetect_wave  (VI, ALLWIN, ALLSIG);';
     cb_spikedetect_mteo = '[VI, ALLWIN, ALLSIG] = pop_spikedetect_mteo  (VI, ALLWIN, ALLSIG);';
+    cb_artefactdetect_maxabsdiffpsd = '[VI, ALLWIN, ALLSIG] = pop_artefactdetect_maxabsdiffpsd  (VI, ALLWIN, ALLSIG);';
     cb_artifactrej      = '[VI, ALLWIN, ALLSIG] = artifactrej_variationthresh(VI, ALLWIN, ALLSIG);';
     cb_cancel           = '[ALLWIN]             = buffernavigparams     (VI, ALLWIN, ALLSIG, ''cancel'');';
     cb_restore          = '[ALLWIN]             = buffernavigparams     (VI, ALLWIN, ALLSIG, ''restore'');';
@@ -171,6 +172,7 @@ if 1%ismain
     detect_hfo_m        = uimenu (detect_m,'Label','HFOs');
     detect_spikes_m     = uimenu (detect_m,'Label','Epileptic Spikes');
     detect_ripplelab_m  = uimenu (detect_hfo_m,'Label','Ripple Lab');
+%     detect_artefact_m   = uimenu (detect_m,'Label','Artefact');
     uimenu (detect_ripplelab_m, 'Label', 'Short Time Energy (Staba)', 'Callback', cb_ripplelab_ste);
     uimenu (detect_ripplelab_m, 'Label', 'Short Line Length', 'Callback', cb_ripplelab_sll);
     uimenu (detect_ripplelab_m, 'Label', 'Hilbert', 'Callback', cb_ripplelab_hil);
@@ -178,6 +180,7 @@ if 1%ismain
     uimenu (detect_m,           'Label', 'Artifact Rejection', 'Callback', cb_artifactrej);
     uimenu (detect_spikes_m,    'Label', 'Wavelet Detector', 'Callback', cb_spikedetect_wave);
     uimenu (detect_spikes_m,    'Label', 'MTEO Detector', 'Callback', cb_spikedetect_mteo);
+%     uimenu (detect_artefact_m,  'Label', 'micro - maxAbsDiffPSD', 'Callback', cb_artefactdetect_maxabsdiffpsd);
     tools_m = uimenu (f,'Label','Tools');
     uimenu (tools_m, 'Label', 'Cancel',     'Callback', cb_cancel, 'Accelerator','Z');
     uimenu (tools_m, 'Label', 'Restore',    'Callback', cb_restore,'Accelerator','Y');
@@ -190,7 +193,7 @@ if 1%ismain
     uimenu (help_m,  'Label', 'See Doc',    'Callback', cb_help);
 end
 
-  
+
 %-----------------------------------               
 %- Observation window time panel
 cb_obstimetplus     = [
@@ -280,7 +283,7 @@ cb_editctimet   = [
             '[ALLWIN] = checktimevariables (VI, ALLWIN, ALLSIG);',...
             'ALLWIN = redrawwin(VI,ALLWIN,ALLSIG);'];
 
-
+%- Move in time panel
 mit_p   = uipanel(f,'Title','','Units','pixels','Position',[0.4*figpos(3),5,0.2*figpos(3),40],'tag','mitp');
 uicontrol (mit_p,'Style','edit','Units','normalized','Position',[0.42,0.2,0.16,0.6],'tag','ctimetedit',...
         'Callback',cb_editctimet);

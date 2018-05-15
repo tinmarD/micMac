@@ -6,7 +6,7 @@ function [VI, ALLWIN, ALLSIG ] = pop_filtersignal (VI, ALLWIN, ALLSIG)
 %   available
 %
 % See also computefiltercoeff
-    
+vi_icadefs;
 
 [SigCont,~,~,~,sigdesc] = getsignal (ALLSIG,'type','continuous');
 if isempty(SigCont)

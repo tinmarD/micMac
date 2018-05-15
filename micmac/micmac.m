@@ -39,6 +39,7 @@ end
 evalin('base','clear all; close all;');
 evalin('base','vi_global;');
 evalin('base','[VI,ALLSIG] = vi_initglobal (VI,ALLSIG);');
+% vi_icadefs;
 
 f = micmac_mainfig (1);
 
