@@ -66,8 +66,9 @@ chanNamesBipolar    = [chanNamesBipolar{:}];
 
 
 %- Create channel correlations
+nBadChannels        = length(Sig.badchannelpos)
 nChanMono           = Sig.nchan;
-nChanBi             = Sig.nchan-nElectrodeEEG;
+nChanBi             = Sig.nchan-nElectrodeEEG-;
 chancorrMono2Bi     = zeros(nChanMono,2);
 chancorrBi2Mono     = zeros(nChanBi,2);
 elPosMono           = getelectrodepos(Sig);
@@ -99,8 +100,10 @@ for i=1:length(electrodeNoEEGNum);
     elNum_i = electrodeNoEEGNum(i);
     elChanMono_i    = find(elPosMono==elNum_i);
     elChanBi_i      = find(elPosBi==elNum_i);
-    chancorrMono2Bi(elChanMono_i,:) = [elChanBi_i,elChanBi_i];
-    chancorrBi2Mono(elChanBi_i,:)   = [elChanMono_i,elChanMono_i];
+    for j=1:length(elChanMono_i)
+        chancorrMono2Bi(elChanMono_i(j),:) = [elChanBi_i(j),elChanBi_i(j)];
+        chancorrBi2Mono(elChanBi_i(j),:)   = [elChanMono_i(j),elChanMono_i(j)];
+    end
 end
 
 [~,SigMonoInd]  = getsignal(ALLSIG,'sigid',Sig.id);
