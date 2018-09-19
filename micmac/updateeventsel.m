@@ -56,7 +56,7 @@ else
         if isempty(VI.eventsel)
             set(changecolorpb,'ForegroundColor',[0,0,0]);
         else
-            VI.eventpos = 1;
+%             VI.eventpos = 1;
             eventColors         = reshape([VI.eventsel.color],3,length(VI.eventsel))';
             eventUniqueColors   = unique(eventColors,'rows');
             if size(eventUniqueColors,1)==1

@@ -44,8 +44,9 @@ if VI.cursor.type == 1
             end
     end
     VI.cursor.hlastcursor     = [];
-    if strcmp(View.domain,'f') && View.params.logscale
-        xoffset = 10.^(log10(curx)+0.01*(log10(View.params.fmax)-log10(View.params.fmin))) - curx;
+    if Win.visumode == 2 && strcmp(View.domain,'f') && View.params.logscale
+%         xoffset = 10.^(log10(curx)+0.01*(log10(View.params.fmax)-log10(View.params.fmin))) - curx;
+        xoffset = 0;
         VI.cursor.hlastcursor (1) = text (curx-0.2*xoffset,cury,'x');
         VI.cursor.hlastcursor (2) = text (curx+xoffset,cury,txt,'Fontsize',8,'BackgroundColor',[.7 .9 .7],'HorizontalAlignment','left');
     else

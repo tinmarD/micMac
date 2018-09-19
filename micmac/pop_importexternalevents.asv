@@ -74,7 +74,7 @@ results = inputgui (geometry, uilist, 'title', 'Import External Events');
 if ~isempty(results)
     filepath        = results{1};
     sigPos          = results{2};
-    sigId           = ALLSIG(rawSigInd(sigPos)).id;
+    sigId           = ArawSigInd(sigPos);
     sep             = results{3};
     if ~isnan(str2double(sep)) && str2double(sep)==9
         sep = char(9);

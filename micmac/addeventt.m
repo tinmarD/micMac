@@ -19,7 +19,7 @@ function VI = addeventt(VI, ALLWIN, ALLSIG, eventType, tpos, duration, chanind, 
 % See also  s_newevent
 
 [Sig,sigsel] = getsignal(ALLSIG,sigid);
-if isempty(sigsel); error(['No signal has an id equal to ',num2str(sigid)]); end;
+if sigsel==0; error(['No signal has an id equal to ',num2str(sigid)]); end;
 
 %- Create the new event structure
 [~, rawparentid] = getsigrawparent (ALLSIG, sigid);

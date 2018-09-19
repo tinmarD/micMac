@@ -12,7 +12,11 @@ function [VI] = orderevents (VI,h)
 % See also pop_seeevents, updateeventsel, navigateevent
 
 if isempty(VI.eventall); return; end;
+
 if nargin==1; figh=gcbf; else figh=h; end;
+% if nargin==2; figh=h; else figh=findobj('tag','eventwindow'); end;
+% if isempty(figh); return; end;
+
 
 %- Update GUI
 orderfieldpop1  = findobj (figh,'tag','ordersel1');
