@@ -102,7 +102,7 @@ if 1%ismain
     cb_addeventoptions  = '[VI, ALLWIN, ALLSIG] = pop_addeventoptions   (VI, ALLWIN, ALLSIG);';
     cb_freqestimation   = '[VI, ALLWIN, ALLSIG] = freqestimation        (VI, ALLWIN, ALLSIG);';
     cb_importmicmacevents= 'VI                  = importeventsfromfile  (VI,1);';
-    cb_importanywaveevents='VI                  = importanywaveeventsfromfile  (VI, ALLSIG);';
+    cb_importanywaveevents='[VI, ALLWIN, ALLSIG]= pop_importanywaveevents(VI, ALLWIN, ALLSIG);';
     cb_importextevents  = '[VI, ALLWIN, ALLSIG] = pop_importexternalevents(VI,ALLWIN,ALLSIG);';
     cb_rejectevents     = '[VI, ALLWIN, ALLSIG] = pop_rejectevents(VI,ALLWIN,ALLSIG);';
     cb_previousevent    = '[VI, ALLWIN, ALLSIG] = navigateevent         (VI, ALLWIN, ALLSIG, ''previous'');';

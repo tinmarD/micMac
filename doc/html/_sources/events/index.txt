@@ -1,9 +1,0 @@
-##################
-     Events
-##################
-
-.. toctree::
-   :maxdepth: 2
-
-   event_window
-   add_an_event

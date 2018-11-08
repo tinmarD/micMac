@@ -28,7 +28,7 @@ cb_chansel = [
     'sigdesc    = get(findobj(gcbf, ''tag'', ''rawsigs''),''String'');',...
     'pos        = get(findobj(gcbf, ''tag'', ''rawsigs''),''Value'');',...
     '[~,sigpos] = getsigfromdesc (ALLSIG, sigdesc{pos});',...
-    'chanselpos = pop_channelselect(ALLSIG(sigpos),1,1,chanselpos);',...
+    'chanselpos = pop_channelselect(ALLSIG(sigpos),0,1,chanselpos);',...
     'set(gcbf,''userdata'',chanselpos);',...
     'set(findobj(''tag'',''chanseledit''),''String'',[''['',num2str(chanselpos),'']'']);',...
     ];
@@ -57,13 +57,14 @@ if ~isempty(results)
     if isempty(rangesel); rangesel=[0,Sig.tmax]; end;
     %- Channel selection
     if isempty(chanselpos)
-        if isempty(chanselman); 
+        if isempty(chanselman);
             chanselman=1:Sig.nchan; 
         else
             try
                 chanselman = eval(['[',chanselman,']',]);
             catch
                 chanselman=1:Sig.nchan;
+                warning('Error evaluating channel selection');
             end
         end
         chanselman(chanselman<1)=[];

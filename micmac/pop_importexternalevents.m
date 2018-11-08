@@ -154,12 +154,10 @@ if ~isempty(results)
 
     end
     
-    % TODO check doublons, check latencies in addeventt(), don't overwrite events
-
-    VI = updateeventsel (VI,1);
-    
+    % TODO check doublons, check latencies in addeventt()
+    VI = updateeventsel (VI,1);    
     [VI, ALLWIN, ALLSIG] = pop_seeevents(VI, ALLWIN, ALLSIG);
-    
+
 end
 
 end
