@@ -8,6 +8,7 @@ TYPE_COL        = 1;
 TIME_COL        = 3;
 DURATION_COL    = 4;
 CHANNAME_COL    = 5;
+COLOR_COL       = 6;
 
 % Open the file in binary mode
 fid = fopen(filepath, 'rb');
@@ -60,10 +61,12 @@ for i=1:nevents
     eventlist(i).type = label_i;
     eventlist(i).tpos = str2double(eventvalue{TIME_COL});
     eventlist(i).duration = str2double(eventvalue{DURATION_COL});
+    % Channel name 
     if (length(eventvalue) >= CHANNAME_COL) && ~global_ev
         channame = strtrim(eventvalue{CHANNAME_COL});
-        channame = channame(1:end-1);
-        channame = regexprep(channame,' ','');
+        channame = channame(1:end-1);   % Remove the ',' at the end (always present ?)
+        channame = regexprep(channame,'EEG','');  % Remove the 'EEG' if present
+        channame = regexprep(channame,' ','');  
         chanind = find(strcmp(parent_sig.channamesnoeeg,channame));
         if isempty(chanind)
             warning(['Could not find the channel named ', channame])
@@ -78,11 +81,21 @@ for i=1:nevents
         eventlist(i).channelname = 'all';
         eventlist(i).channelind  = -1;
     end
+    % Color 
+    if length(eventvalue) >= COLOR_COL
+        try
+            eventlist(i).color = hex2rgb(eventvalue{COLOR_COL});
+        catch
+            eventlist(i).color = vi_graphics('eventcolor');
+        end
+    else
+        eventlist(i).color = vi_graphics('eventcolor');
+    end
     eventlist(i).rawparentid = 1;
     eventlist(i).sigid = parent_sig.id;
     eventlist(i).sigdesc = parent_sig.desc;
     eventlist(i).id = event_id_start + i;
-    eventlist(i).color = vi_graphics('eventcolor');
+
 end
 % eventlist(event_to_delete_pos) = [];
 
