@@ -86,8 +86,8 @@ if ~isempty(results)
     
     % Add the cleaned sig
     [VI, ALLWIN, ALLSIG, sigid] = addsignal (VI, ALLWIN, ALLSIG, SigClean.data, Sig.channames, ...
-        Sig.srate, 'continuous', Sig.filename, Sig.filepath, Sig.montage, ...
-        [Sig.desc,'_clean'], 1, Sig.id, Sig.badchannelpos);
+        Sig.srate, 'continuous', Sig.tmin, Sig.tmax, Sig.filename, Sig.filepath, Sig.montage, ...
+        [Sig.desc,'_clean'], 1, Sig.id, Sig.badchannelpos, Sig.badepochpos);
     
     % Add a view if asked, keep the same gain as the temporal view with signal Sig (if found)
     if results{end-2}

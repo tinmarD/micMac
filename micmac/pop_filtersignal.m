@@ -197,8 +197,8 @@ if ~isempty(results)
 
     % Add the filtered signal
     [VI, ALLWIN, ALLSIG, sigid] = addsignal (VI, ALLWIN, ALLSIG, datafilt, Sig.channames, ...
-        sigsrate, 'continuous', Sig.filename, Sig.filepath, Sig.montage, ...
-        sigdesc, 0, Sig.id, Sig.badchannelpos);
+        sigsrate, 'continuous', Sig.tmin, Sig.tmax, Sig.filename, Sig.filepath, Sig.montage, ...
+        sigdesc, 0, Sig.id, Sig.badchannelpos, Sig.badepochpos);
     
     % Add a view if asked 
     if results{9}

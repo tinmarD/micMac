@@ -54,7 +54,7 @@ if ~isempty(Sig)
     %- Add the signal temporarily (to be able to create channel
     % correspondences) - with the defaults parameters
     [VI, ALLWIN, ALLSIG, sigid] = addsignal (VI, ALLWIN, ALLSIG, Sig.data, Sig.channames, ...
-        Sig.srate, 'continuous', Sig.filename, Sig.filepath, montagedef, sigdescdef, 1, -1);
+        Sig.srate, 'continuous', Sig.tmin, Sig.tmax, Sig.filename, Sig.filepath, montagedef, sigdescdef, 1, -1, []);
     assignin ('base','ALLSIG',ALLSIG);
     assignin ('base','VI',VI);
 

@@ -84,7 +84,7 @@ if ~isempty(results)
     % the same than the id of the parent signal of the selected one...
     [~, rawsigid_sel] = getsigrawparent (ALLSIG, sigid_sel);
     events_sel = getevents(VI, 'type', evtype_sel, 'rawpid', rawsigid_sel);
-    [VI, ALLWIN, ALLSIG] = rejectevents(VI, ALLWIN, ALLSIG, sigid_sel, events_sel, reject, newsig);
+    [VI, ALLWIN, ALLSIG, ~] = rejectevents(VI, ALLWIN, ALLSIG, sigid_sel, events_sel, reject, newsig);
     % Add a view if asked 
     if do_addview
         [VI, ALLWIN, ALLSIG] = addview(VI, ALLWIN, ALLSIG, winpos, ALLSIG(end).id, 't', viewpos);

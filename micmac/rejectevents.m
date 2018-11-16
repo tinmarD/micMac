@@ -1,5 +1,5 @@
-function [VI, ALLWIN, ALLSIG] = rejectevents(VI, ALLWIN, ALLSIG, sigid, Events, reject_mode, new_sig_mode)
-%[VI, ALLWIN, ALLSIG] = REJECTEVENTS(VI, ALLWIN, ALLSIG, sigid, Events, reject_mode, new_sig_mode)
+function [VI, ALLWIN, ALLSIG, Sig_out] = rejectevents(VI, ALLWIN, ALLSIG, sigid, Events, reject_mode, new_sig_mode)
+%[VI, ALLWIN, ALLSIG, Sig_out] = REJECTEVENTS(VI, ALLWIN, ALLSIG, sigid, Events, reject_mode, new_sig_mode)
 %   From the Signal defined by sigid, and from the Event list Events, 
 %   reject the time periods defined by the events. Or if the reject_mode is
 %   False, the time periods defined by the events are the only one kept.
@@ -8,7 +8,7 @@ function [VI, ALLWIN, ALLSIG] = rejectevents(VI, ALLWIN, ALLSIG, sigid, Events, 
 %   Events must have a duration
 %
 %   The new signal gets a new id and a new desc.
-%   The new signal is raw (thus has no parent) 
+%   The new signal is raw (thus has no parent)
 
 n_events = length(Events);
 [Sig_out, sig_pos] = getsignal(ALLSIG, 'sigid', sigid);
@@ -39,9 +39,9 @@ Sig_out.parent  = -1;
 % If new_sig_mode, add this signal at the end of ALLSIG
 if new_sig_mode
     [VI, ALLWIN, ALLSIG] = addsignal(VI, ALLWIN, ALLSIG, Sig_out.data,...
-        Sig_out.channames, Sig_out.srate, Sig_out.type, Sig_out.filename,...
+        Sig_out.channames, Sig_out.srate, Sig_out.type, Sig_out.tmin, Sig_out.tmax, Sig_out.filename,...
         Sig_out.filepath, Sig_out.montage, Sig_out.desc, Sig_out.israw,... 
-        Sig_out.parent, Sig_out.badchannelpos);
+        Sig_out.parent, Sig_out.badchannelpos, Sig_out.badepochpos);
     % Remove chancorr with every other signal (because time is not
     % synchronized)
     for i_sig = 1:length(ALLSIG)-1
@@ -50,7 +50,7 @@ if new_sig_mode
     end
 % Else, update the current signal
 else
-    error('Not implemmented yet - set new_sig_mode to 1');
+    warning('Not implemmented yet - only returning Sig_out');
 end
 
 end

@@ -69,8 +69,8 @@ if ~isempty(results)
     sigdesc = results{1};
     %- Add signal
     [VI, ALLWIN, ALLSIG, sigid ]= addsignal(VI, ALLWIN, ALLSIG, ...
-        eventSigData, parentSig.channames, -1, 'eventSig', parentSig.filename, parentSig.filepath, ...
-        'undefined', sigdesc, 1, -1, []);
+        eventSigData, parentSig.channames, -1, 'eventSig', Sig.tmin, Sig.tmax, parentSig.filename, parentSig.filepath, ...
+        'undefined', sigdesc, 1, -1, [], []);
     %- Add view if asked
     if results{end-2}
         [VI, ALLWIN, ALLSIG]    = addview (VI, ALLWIN, ALLSIG, results{end-1},sigid,'t',str2double(results{end}));

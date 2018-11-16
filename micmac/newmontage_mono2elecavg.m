@@ -77,8 +77,8 @@ chanNamesAvg    = [chanNamesAvg{:}];
 
 %- Create new signal structure
 [VI, ALLWIN, ALLSIG, sigid] = addsignal(VI, ALLWIN, ALLSIG, dataAvgMat, ...
-    chanNamesAvg, Sig.srate, Sig.type, ' ', ' ', 'electrode average', [Sig.desc,'_elAvg'], ...
-    Sig.israw, -1, Sig.badchannelpos);
+    chanNamesAvg, Sig.srate, Sig.type, Sig.tmin, Sig.tmax,  ' ', ' ', 'electrode average', [Sig.desc,'_elAvg'], ...
+    Sig.israw, -1, Sig.badchannelpos, Sig.badepochpos);
 
 %- Add channcorr
 [~,SigMonoInd]  = getsignal(ALLSIG,'sigid',Sig.id);

@@ -67,6 +67,8 @@ switch Win.visumode
                 plotviewstacked (VI, ALLWIN, ALLSIG, Win.views(stackedviewsind(v)), winnb, Win.ctimet, Win.obstimet, chansel, ax(v));
             elseif strcmp(Sig.type,'eventSig')
                 plotviewstacked_eventsig (VI, ALLWIN, ALLSIG, Win.views(stackedviewsind(v)), winnb, Win.ctimet, Win.obstimet, chansel, ax(v));
+            elseif strcmp(Sig.type,'epoch')
+                plotviewstacked_epoch (VI, ALLWIN, ALLSIG, Win.views(stackedviewsind(v)), winnb, Win.ctimet, Win.obstimet, chansel, ax(v));
             end
             set(allchild(gca),'hittest','off');    
             

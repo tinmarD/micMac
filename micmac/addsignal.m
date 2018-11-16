@@ -1,8 +1,9 @@
 function [VI, ALLWIN, ALLSIG, sigid] = addsignal(VI, ALLWIN, ALLSIG, data, channames,...
-                    srate, type, filename, filepath, montage, desc, israw, parentId, badchannelpos)
+                    srate, type, tmin, tmax, filename, filepath, montage, desc, israw,...
+                    parentId, badchannelpos, badepochpos)
 % [VI, ALLWIN, ALLSIG, sigid] = ADDSIGNAL(VI, ALLWIN, ALLSIG, data, channames,...
-%       srate, type, filename, filepath, montage, desc, israw, parentId, id, ...
-%       badchannelpos)
+%       srate, type, tmin, tmax,  filename, filepath, montage, desc, israw,
+%       parentId, badchannelpos, badepochpos))
 % Add a signal to the ALLSIG structure. 
 %
 % INPUTS :
@@ -10,7 +11,9 @@ function [VI, ALLWIN, ALLSIG, sigid] = addsignal(VI, ALLWIN, ALLSIG, data, chann
 %   - data                  : Signal data matrix [nSamples*nChannels]
 %   - channames             : Cell containing channel names
 %   - srate                 : Sampling frequency (Hz)
-%   - type                  : Signal type ('continuous' or 'eventsig')
+%   - type                  : Signal type ('continuous' or 'eventsig', or 'epoch')
+%   - tmin                  : Minimal time (s)
+%   - tmax                  : Maximal time (s)
 %   - filename              : Name of the file
 %   - filepath              : Path of the file
 %   - montage               : Montage of the file ('monopolar' or 'bipolar')
@@ -18,6 +21,7 @@ function [VI, ALLWIN, ALLSIG, sigid] = addsignal(VI, ALLWIN, ALLSIG, data, chann
 %   - israw                 : 1 if the signal is raw, 0 otherwise
 %   - parentId              : ID of the parent signal (if signal is raw, set to -1)
 %   - badchannelpos         : Position of the bad channels 
+%   - badepochpos           : Position of the bad epochs (for epoch sig only)
 %
 % OUPUTS : 
 %   - VI, ALLWIN, ALLSIG
@@ -31,10 +35,15 @@ desc = makeuniquesigdesc (ALLSIG, desc);
 % Increment signal counter
 [VI,sigid]  = incuniquecounter (VI,'signal');
 
-if nargin < 14; badchannelpos = []; end;
+if nargin < 16
+    badchannelpos = [];
+    badepochpos = [];
+elseif nargin < 17
+    badepochpos = [];
+end
 % Add new signal to ALLSIG
-Sig = s_newsig (data, channames, srate, type, filename, filepath, ...
-    montage, desc, israw, parentId, sigid, badchannelpos);
+Sig = s_newsig (data, channames, srate, type, tmin, tmax, filename, ...
+    filepath, montage, desc, israw, parentId, sigid, badchannelpos, badepochpos);
 % Save new signal
 if isempty(ALLSIG)
     ALLSIG  = Sig;

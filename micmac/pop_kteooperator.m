@@ -58,8 +58,8 @@ if ~isempty(results)
     
     % Add the signal
     [VI, ALLWIN, ALLSIG, sigid] = addsignal (VI, ALLWIN, ALLSIG, kteodata, Sig.channames, ...
-        Sig.srate, 'continuous', Sig.filename, Sig.filepath, Sig.montage, ...
-        sigdesc, 0, Sig.id, Sig.badchannelpos);
+        Sig.srate, 'continuous', Sig.tmin, Sig.tmax, Sig.filename, Sig.filepath, Sig.montage, ...
+        sigdesc, 0, Sig.id, Sig.badchannelpos, Sig.badepochpos);
     
     % Add a view if asked 
     if results{3}

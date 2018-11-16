@@ -1,0 +1,4 @@
+26/06/2017 
+	- Suppression de jediconv_nsx2eeglab qui est la même que nsx2eeglab
+	- Nouvelle fonction findtriggers_micro
+	- Possibilité d'ajouter des triggers au fichier micro converti en .edf quand les triggers sont présents dans le fichier NEV. Ainsi on peut visualiser les triggers des micro dans micMac.

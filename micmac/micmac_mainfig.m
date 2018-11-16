@@ -81,8 +81,11 @@ if 1%ismain
     cb_loadrawsigns5    = '[VI, ALLWIN, ALLSIG] = pop_loadrawsig        (VI, ALLWIN, ALLSIG, ''NS5'');';
     cb_loadrawsigfif    = '[VI, ALLWIN, ALLSIG] = pop_loadrawsig        (VI, ALLWIN, ALLSIG, ''FIF'');';
     cb_loadeventsig     = '[VI, ALLWIN, ALLSIG] = pop_loadeventsig      (VI, ALLWIN, ALLSIG);';
+    cb_loadmneepochs    = '[VI, ALLWIN, ALLSIG] = pop_loadepochs        (VI, ALLWIN, ALLSIG, ''mne'');';
+    cb_loadeeglabepochs = '[VI, ALLWIN, ALLSIG] = pop_loadepochs        (VI, ALLWIN, ALLSIG, ''eeglab'');';
     cb_exportdata       = '[VI, ALLWIN, ALLSIG] = pop_exportdata        (VI, ALLWIN, ALLSIG);';
     cb_exportdatatoedf  = '[VI, ALLWIN, ALLSIG] = pop_exportdatatoedf   (VI, ALLWIN, ALLSIG);';
+    cb_exportfromevents = '[VI, ALLWIN, ALLSIG] = pop_exportfromevents  (VI, ALLWIN, ALLSIG);';
     cb_filtersig        = '[VI, ALLWIN, ALLSIG] = pop_filtersignal      (VI, ALLWIN, ALLSIG);';
     cb_newmontage       = '[VI, ALLWIN, ALLSIG] = pop_newmontage        (VI, ALLWIN, ALLSIG);';
     cb_kteooperator     = '[VI, ALLWIN, ALLSIG] = pop_kteooperator      (VI, ALLWIN, ALLSIG);';
@@ -134,9 +137,12 @@ if 1%ismain
     uimenu (sig_load_m,'Label','NS5 Files / Blackrock','Callback',cb_loadrawsigns5);
     uimenu (sig_load_m,'Label','FIF Files','Callback',cb_loadrawsigfif);
     uimenu (sig_load_m,'Label','Event Signal','Callback',cb_loadeventsig,'Separator','on');
+    uimenu (sig_load_m,'Label','MNE epochs','Callback',cb_loadmneepochs,'Separator','on');
+    uimenu (sig_load_m,'Label','EEGLAB epochs','Callback',cb_loadeeglabepochs);
     sig_export_m= uimenu (sig_m,'Label','Export');
     uimenu (sig_export_m,'Label','Export Data','Callback',cb_exportdata);
     uimenu (sig_export_m,'Label','Export Data (EDF)','Callback',cb_exportdatatoedf);
+    uimenu (sig_export_m,'Label','Export from Events','Callback',cb_exportfromevents,'Separator','on');
     uimenu (sig_m,'Label','New montage','Callback',cb_newmontage,'Separator','on');
     uimenu (sig_m,'Label','Filter signal','Callback',cb_filtersig,'Accelerator','F','Separator','on'); 
     sig_op_m    = uimenu (sig_m,'Label','Operators');

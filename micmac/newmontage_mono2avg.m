@@ -72,8 +72,8 @@ chanNamesAvg    = [chanNamesAvg{:}];
 
 %- Create bipolar signal structure
 [VI, ALLWIN, ALLSIG, sigid] = addsignal(VI, ALLWIN, ALLSIG, dataAvgMat, ...
-    chanNamesAvg, Sig.srate, Sig.type, ' ', ' ', 'average', [Sig.desc,'_avg'], ...
-    Sig.israw, -1, Sig.badchannelpos);
+    chanNamesAvg, Sig.srate, Sig.type, Sig.tmin, Sig.tmax, ' ', ' ', 'average', [Sig.desc,'_avg'], ...
+    Sig.israw, -1, Sig.badchannelpos, Sig.badepochpos);
 
 %- Add channcorr
 [~,SigMonoInd]  = getsignal(ALLSIG,'sigid',Sig.id);

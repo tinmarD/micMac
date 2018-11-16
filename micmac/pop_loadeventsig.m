@@ -68,7 +68,7 @@ montagedef      = 'undefined';
 %- Add the signal temporarily (to be able to create channel
 % correspondences) - with the defaults parameters
 [VI, ALLWIN, ALLSIG sigid] = addsignal(VI, ALLWIN, ALLSIG, eventSigData, eventSigChannames, -1, 'eventSig', ...
-    filename, filepath, montagedef, sigdescdef, 1, -1, []);
+    Sig.tmin, Sig.tmax, filename, filepath, montagedef, sigdescdef, 1, -1, [], []);
 assignin ('base','ALLSIG',ALLSIG);
 assignin ('base','VI',VI);
 

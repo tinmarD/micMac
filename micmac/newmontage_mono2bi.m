@@ -61,8 +61,8 @@ chanNamesBipolar    = [chanNamesBipolar{:}];
 
 %- Create bipolar signal structure
 [VI, ALLWIN, ALLSIG, sigid] = addsignal(VI, ALLWIN, ALLSIG, dataBipolarMat, ...
-    chanNamesBipolar, Sig.srate, Sig.type, ' ', ' ', 'bipolar', [Sig.desc,'-bipolar'], ...
-    Sig.israw, -1, []);
+    chanNamesBipolar, Sig.srate, Sig.type, Sig.tmin, Sig.tmax, ' ', ' ', 'bipolar', [Sig.desc,'-bipolar'], ...
+    Sig.israw, -1, [], Sig.badepochpos);
 
 
 %- Create channel correlations
