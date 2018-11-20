@@ -76,93 +76,91 @@ end
            
 end
 
-
-function VI = chancorrauto (VI, ALLSIG, Sig)
-
-Sigs(1)     = Sig;
-newsigpos   = length(ALLSIG);
-% rawsigsum   = cumsum([ALLSIG.israw]);
-% newsigpos   = rawsigsum(newsigpos);
-
-for j=1:length(ALLSIG)-1
-    Sigs(2) = ALLSIG(j);
-    %- If signal is not raw signal, continue to the next one
-    if ~Sigs(2).israw
-        continue;
-    end
-    
-    %- First try to determine the micro Sig and the macro Sig based on the
-    % first electrode name case
-    sigmicronb = [];
-    sigmacronb = [];
-    sig1firstchanname = strtrim(Sigs(1).channames{1});
-    sig1firstelname   = regexp(sig1firstchanname,'[\w '']+','match');
-    sig1firstelname   = strtrim(sig1firstelname{1});
-    sig2firstchanname = strtrim(Sigs(2).channames{1});
-    sig2firstelname   = regexp(sig2firstchanname,'[\w '']+','match');
-    sig2firstelname   = strtrim(sig2firstelname{1});
-    %- Remove 'EEG' if present
-    sig1firstelname   = strtrim(regexprep(sig1firstelname,'EEG',''));
-    sig2firstelname   = strtrim(regexprep(sig2firstelname,'EEG',''));
-
-    if ~isempty(regexp(sig1firstelname(1),'[a-z]','once'))
-        sigmicronb = 1;
-    else
-        sigmacronb = 1;
-    end
-    if ~isempty(regexp(sig2firstelname(1),'[a-z]','once'))
-        sigmicronb = 2;
-    else
-        sigmacronb = 2;
-    end
-
-    %- If the signal are not one micro and one Macro
-    if isempty(sigmacronb) || isempty(sigmicronb)
-        %- If the 2 signals have exactly the same channels
-        if isequal(Sigs(1).channames,Sigs(2).channames)
-            chancorr = repmat((1:Sigs(1).nchan)',1,2);
-            VI = addchancorr(VI,newsigpos,j,chancorr,chancorr);
-%             VI.chancorr{newsigpos,j} = chancorr;
-%             VI.chancorr{j,newsigpos} = chancorr;
-            continue;
-        else
-            continue;
-        end
-    end
-
-    %- If micro and macro signals found
-    micro2macrochancorr = zeros(Sigs(sigmicronb).nchan,2);
-    macro2microchancorr = zeros(Sigs(sigmacronb).nchan,2);
-    %- Get the list of the different micro-electrode names
-    microelnames = regexp(Sigs(sigmicronb).channames,' [a-z]+''?','match');
-    microelnames = strtrim(unique([microelnames{:}]));
-    %- For each micro electrode name find the correspondig macro channels based
-    % on the name
-    for i=1:length(microelnames)
-        macrochancorr = regexpi(Sigs(sigmacronb).channames,[' ',microelnames{i},'\d+'],'match','once');
-        macrochancorr = find(~cellfun(@isempty,macrochancorr));
-        if isempty(macrochancorr); continue; end;
-        macrochancorr = macrochancorr(1);
-        microchancorr = regexp(Sigs(sigmicronb).channames,[' ',microelnames{i},'\d+']);
-        microchancorr = find(~cellfun(@isempty,microchancorr));
-        if isempty(microchancorr); continue; end;
-        micro2macrochancorr (microchancorr,:) = macrochancorr;
-        macro2microchancorr (macrochancorr,:) = [min(microchancorr),max(microchancorr)];
-    end
-
-    % If the new signal is the micro-electrode one
-    
-    if sigmicronb==1
-        VI = addchancorr(VI,newsigpos,j,micro2macrochancorr,macro2microchancorr);
-%         VI.chancorr{newsigpos,j} = micro2macrochancorr;
-%         VI.chancorr{j,newsigpos} = macro2microchancorr;
-    else
-        VI = addchancorr(VI,newsigpos,j,macro2microchancorr,micro2macrochancorr);
-%         VI.chancorr{newsigpos,j} = macro2microchancorr;
-%         VI.chancorr{j,newsigpos} = micro2macrochancorr;
-    end
-    
-end
-
-end
+% 
+% function VI = chancorrauto (VI, ALLSIG, Sig)
+% 
+% Sigs(1)     = Sig;
+% newsigpos   = length(ALLSIG);
+% % rawsigsum   = cumsum([ALLSIG.israw]);
+% % newsigpos   = rawsigsum(newsigpos);
+% 
+% for j=1:length(ALLSIG)-1
+%     Sigs(2) = ALLSIG(j);
+%     %- If signal is not raw signal, continue to the next one
+%     if ~Sigs(2).israw
+%         continue;
+%     end
+%     
+%     %- First try to determine the micro Sig and the macro Sig based on the
+%     % first electrode name case
+%     sigmicronb = [];
+%     sigmacronb = [];
+%     sig1firstchanname = strtrim(Sigs(1).channames{1});
+%     sig1firstelname   = regexp(sig1firstchanname,'[\w '']+','match');
+%     sig1firstelname   = strtrim(sig1firstelname{1});
+%     sig2firstchanname = strtrim(Sigs(2).channames{1});
+%     sig2firstelname   = regexp(sig2firstchanname,'[\w '']+','match');
+%     sig2firstelname   = strtrim(sig2firstelname{1});
+%     %- Remove 'EEG' if present
+%     sig1firstelname   = strtrim(regexprep(sig1firstelname,'EEG',''));
+%     sig2firstelname   = strtrim(regexprep(sig2firstelname,'EEG',''));
+% 
+%     if ~isempty(regexp(sig1firstelname(1),'[a-z]','once'))
+%         sigmicronb = 1;
+%     else
+%         sigmacronb = 1;
+%     end
+%     if ~isempty(regexp(sig2firstelname(1),'[a-z]','once'))
+%         sigmicronb = 2;
+%     else
+%         sigmacronb = 2;
+%     end
+% 
+%     %- If the signal are not one micro and one Macro
+%     if isempty(sigmacronb) || isempty(sigmicronb)
+%         %- If the 2 signals have exactly the same channels
+%         if isequal(Sigs(1).channames,Sigs(2).channames)
+%             chancorr = repmat((1:Sigs(1).nchan)',1,2);
+%             VI = addchancorr(VI,newsigpos,j,chancorr,chancorr);
+% %             VI.chancorr{newsigpos,j} = chancorr;
+% %             VI.chancorr{j,newsigpos} = chancorr;
+%             continue;
+%         else
+%             continue;
+%         end
+%     end
+% 
+%     %- If micro and macro signals found
+%     micro2macrochancorr = zeros(Sigs(sigmicronb).nchan,2);
+%     macro2microchancorr = zeros(Sigs(sigmacronb).nchan,2);
+%     %- Get the list of the different micro-electrode names
+%     microelnames = regexp(Sigs(sigmicronb).channames,' [a-z]+''?','match');
+%     microelnames = strtrim(unique([microelnames{:}]));
+%     %- For each micro electrode name find the correspondig macro channels based
+%     % on the name
+%     for i=1:length(microelnames)
+%         macrochancorr = regexpi(Sigs(sigmacronb).channames,[' ',microelnames{i},'\d+'],'match','once');
+%         macrochancorr = find(~cellfun(@isempty,macrochancorr));
+%         if isempty(macrochancorr); continue; end;
+%         macrochancorr = macrochancorr(1);
+%         microchancorr = regexp(Sigs(sigmicronb).channames,[' ',microelnames{i},'\d+']);
+%         microchancorr = find(~cellfun(@isempty,microchancorr));
+%         if isempty(microchancorr); continue; end;
+%         micro2macrochancorr (microchancorr,:) = macrochancorr;
+%         macro2microchancorr (macrochancorr,:) = [min(microchancorr),max(microchancorr)];
+%     end
+% 
+%     % If the new signal is the micro-electrode one
+%     
+%     if sigmicronb==1
+%         VI = addchancorr(VI,newsigpos,j,micro2macrochancorr,macro2microchancorr);
+% %         VI.chancorr{newsigpos,j} = micro2macrochancorr;
+% %         VI.chancorr{j,newsigpos} = macro2microchancorr;
+%     else
+%         VI = addchancorr(VI,newsigpos,j,macro2microchancorr,micro2macrochancorr);
+% %         VI.chancorr{newsigpos,j} = macro2microchancorr;
+% %         VI.chancorr{j,newsigpos} = micro2macrochancorr;
+%     end
+%     
+% end
 

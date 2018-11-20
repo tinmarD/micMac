@@ -92,6 +92,8 @@ if 1%ismain
     cb_mteooperator     = '[VI, ALLWIN, ALLSIG] = pop_mteooperator      (VI, ALLWIN, ALLSIG);';
     cb_threshold        = '[VI, ALLWIN, ALLSIG] = pop_threshold         (VI, ALLWIN, ALLSIG);';
     cb_extractspikes    = '[VI, ALLWIN, ALLSIG] = pop_extractspikes     (VI, ALLWIN, ALLSIG);';
+    cb_resamplesig      = '[VI, ALLWIN, ALLSIG] = pop_resamplesig       (VI, ALLWIN, ALLSIG);';
+    cb_resynchsignals   = '[VI, ALLWIN, ALLSIG] = pop_resynchsignals    (VI, ALLWIN, ALLSIG);';
     cb_cleanlinenoise   = '[VI, ALLWIN, ALLSIG] = pop_cleanlinenoise    (VI, ALLWIN, ALLSIG);';
     cb_markbadchannels  = '[VI, ALLWIN, ALLSIG] = markbadchannels       (VI, ALLWIN, ALLSIG);';
     cb_seteegchannels   = '[VI, ALLWIN, ALLSIG] = pop_seteegchannels    (VI, ALLWIN, ALLSIG);';
@@ -152,6 +154,8 @@ if 1%ismain
     uimenu (sig_op_m,'Label','MTEO','Callback',cb_mteooperator);
     sig_clean_m = uimenu (sig_m,'Label', 'Clean signal');
     uimenu (sig_clean_m,'Label','Clean Line Noise','Callback',cb_cleanlinenoise);
+    uimenu (sig_m,'Label','Resample Signal','Callback',cb_resamplesig);
+    uimenu (sig_m,'Label','Re-synch Signals','Callback',cb_resynchsignals);
     uimenu (sig_m,'Label','Mark as bad channels','Callback',cb_markbadchannels,'Separator', 'on');
     uimenu (sig_m,'Label','Set EEG channels','Callback',cb_seteegchannels);
     view_m  = uimenu (f,'Label','Views');
