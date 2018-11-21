@@ -31,7 +31,7 @@ end
 
 figure (Win.figh);
 figpos = get(Win.figh,'Position');
-
+tic;
 switch Win.visumode
     
     case 1 % "Stacked Mode" - Plot all view one after the other
@@ -62,7 +62,6 @@ switch Win.visumode
             ax(v)   = subaxis(length(stackedviewsind),1,v,'MarginBottom',70/figpos(4),'MarginTop',10/figpos(4),...
             	'MarginLeft',170/figpos(3),'MarginRight',10/figpos(3),'Spacing',0.04);
             set (ax(v),'uicontextmenu',createaxiscontextmenu(Win,v));
-            
             if strcmp(Sig.type,'continuous')
                 plotviewstacked (VI, ALLWIN, ALLSIG, Win.views(stackedviewsind(v)), winnb, Win.ctimet, Win.obstimet, chansel, ax(v));
             elseif strcmp(Sig.type,'eventSig')
@@ -71,7 +70,6 @@ switch Win.visumode
                 plotviewstacked_epoch (VI, ALLWIN, ALLSIG, Win.views(stackedviewsind(v)), winnb, Win.ctimet, Win.obstimet, chansel, ax(v));
             end
             set(allchild(gca),'hittest','off');    
-            
             % Cursor 1
             cb_setfocus = ...
                 ['winnb=find(cat(1,ALLWIN.figh)==gcf);',...
@@ -162,7 +160,7 @@ switch Win.visumode
             end
         end
 end
-
+toc;
 %- Keep track of the handles of axis
 ALLWIN(winnb).axlist = ax;
 

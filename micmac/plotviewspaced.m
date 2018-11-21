@@ -15,6 +15,11 @@ nviews  = length(Win.views);
 Sig     = getsignal(ALLSIG, 'sigid', View.sigid);
 
 tind    = max(1,round(1+Sig.srate*(ctimet-0.5*obstimet))):min(Sig.npnts,round(1+Sig.srate*(ctimet+0.5*obstimet)));
+if isempty(tind); return; end;
+if length(tind) > vi_graphics('maxtimepointsvisu')
+    decimate_factor = floor(length(tind) / vi_graphics('maxtimepointsvisu'));
+    tind = tind(1:decimate_factor:end);
+end
 tvect   = (tind-1)/Sig.srate;
 data    = Sig.data (chansel,tind);
 

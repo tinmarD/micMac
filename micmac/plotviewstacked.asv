@@ -40,15 +40,13 @@ spacingvect	= spacingvect(:);
 
 tind    = max(1,round(1+Sig.srate*(ctimet-0.5*obstimet))):min(Sig.npnts,round(1+Sig.srate*(ctimet+0.5*obstimet)));
 if isempty(tind); return; end;
-if length(tind) > vi_graphics('maxtimepointsvisu')
-    decimate_factor = floor(length(tind) / vi_graphics('maxtimepointsvisu'));
-    tind = tind(1:decimate_factor:end);
-end
 tvect   = (tind-1)/Sig.srate;
 % Modify data to be plot in one axes
 data    = Sig.data (chansel,tind);
 % If many time points, decimate the signal without low-pass filter, only
 % for visualization
+if length(tind) > vi_graphics('maxtimepointsvisu')
+    decimate_factor = np.floor(length(tind) / 
 data    = data.*(-1+exp(View.gain(visumodepos)));
 data    = data - repmat (mean(data,2),1,length(tind));      % Substract mean
 data    = data - repmat(spacingvect,1,length(tind));        % Add a spacing between each signal

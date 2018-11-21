@@ -32,13 +32,17 @@ for j=1:length(ALLSIG)-1
 
     if ~isempty(regexp(sig1firstelname(1),'[a-z]','once'))
         sigmicronb = 1;
+        SigMicro = Sig;
     else
         sigmacronb = 1;
+        SigMacro = Sig;
     end
     if ~isempty(regexp(sig2firstelname(1),'[a-z]','once'))
         sigmicronb = 2;
+        SigMicro = Sig_j;
     else
         sigmacronb = 2;
+        SigMacro = Sig_j;
     end
 
     %- If the signal are not one micro and one Macro
@@ -70,34 +74,49 @@ for j=1:length(ALLSIG)-1
         else
             continue;
         end
-    end
 
-    %- If micro and macro signals found
-    micro2macrochancorr = zeros(Sigs(sigmicronb).nchan,2);
-    macro2microchancorr = zeros(Sigs(sigmacronb).nchan,2);
-    %- Get the list of the different micro-electrode names
-    microelnames = regexp(Sigs(sigmicronb).channames,' [a-z]+''?','match');
-    microelnames = strtrim(unique([microelnames{:}]));
-    %- For each micro electrode name find the correspondig macro channels based
-    % on the name
-    for i=1:length(microelnames)
-        macrochancorr = regexpi(Sigs(sigmacronb).channames,[' ',microelnames{i},'\d+'],'match','once');
-        macrochancorr = find(~cellfun(@isempty,macrochancorr));
-        if isempty(macrochancorr); continue; end;
-        macrochancorr = macrochancorr(1);
-        microchancorr = regexp(Sigs(sigmicronb).channames,[' ',microelnames{i},'\d+']);
-        microchancorr = find(~cellfun(@isempty,microchancorr));
-        if isempty(microchancorr); continue; end;
-        micro2macrochancorr (microchancorr,:) = macrochancorr;
-        macro2microchancorr (macrochancorr,:) = [min(microchancorr),max(microchancorr)];
-    end
-
-    % If the new signal is the micro-electrode one
-    
-    if sigmicronb==1
-        VI = addchancorr(VI,newsigpos,j,micro2macrochancorr,macro2microchancorr);
     else
-        VI = addchancorr(VI,newsigpos,j,macro2microchancorr,micro2macrochancorr);
+        %- If micro and macro signals found
+        micro2macrochancorr = zeros(SigMicro.nchan,2);
+        macro2microchancorr = zeros(SigMacro.nchan,2);
+        %- Get the list of the different micro-electrode names
+        microelnames = regexp(SigMicro.channames,'[a-z]+''?','match');
+        microelnames = strtrim(unique([microelnames{:}]));
+        %- For each micro electrode name find the correspondig macro channels based
+        % on the name
+        for i=1:length(microelnames)
+            macrochancorr = regexpi(SigMacro.channames,[microelnames{i},'\d+'],'match','once');
+            macrochancorr = find(~cellfun(@isempty,macrochancorr));
+            if isempty(macrochancorr)
+                % If micro electrode name contains a p it migth be a '
+                p_pos = regexp(microelnames{i},'p');
+                if ~isempty(p_pos)
+                    microelname_i_prime = microelnames{i};
+                    microelname_i_prime(p_pos(end)) = '''';
+                    macrochancorr = regexpi(SigMacro.channames,[microelname_i_prime,'\d+'],'match','once');
+                    macrochancorr = find(~cellfun(@isempty,macrochancorr));
+                    if isempty(macrochancorr)
+                        continue;
+                    end
+                else
+                    continue; 
+                end;
+            end
+            macrochancorr = macrochancorr(1);
+            microchancorr = regexp(SigMicro.channames,[microelnames{i},'\d+']);
+            microchancorr = find(~cellfun(@isempty,microchancorr));
+            if isempty(microchancorr); continue; end;
+            micro2macrochancorr (microchancorr,:) = macrochancorr;
+            macro2microchancorr (macrochancorr,:) = [min(microchancorr),max(microchancorr)];
+        end
+
+        % If the new signal is the micro-electrode one
+
+        if sigmicronb==1
+            VI = addchancorr(VI,newsigpos,j,micro2macrochancorr,macro2microchancorr);
+        else
+            VI = addchancorr(VI,newsigpos,j,macro2microchancorr,micro2macrochancorr);
+        end
     end
     
 end
