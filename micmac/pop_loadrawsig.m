@@ -7,23 +7,28 @@ if ~isempty(findobj('type','figure','name','Signal description'))
     return;
 end
 
-if      strcmpi(filetype,'edf');    filetypes = {'*.edf;*.EDF'}; 
-elseif  strcmpi(filetype,'ns5');    filetypes = {'*.ns5;*.NS5'};
-elseif  strcmpi(filetype,'fif');    filetypes = {'*.fif;*.FIF'};
+if nargin == 4
+    if      strcmpi(filetype,'edf');    filetypes = {'*.edf;*.EDF'}; 
+    elseif  strcmpi(filetype,'ns5');    filetypes = {'*.ns5;*.NS5'};
+    elseif  strcmpi(filetype,'fif');    filetypes = {'*.fif;*.FIF'};
+    end
+else
+	filetypes = {'*.edf;*.EDF;*.ns5;*.NS5;*.fif;*.FIF'};
 end
 
 [filename, filepath] = uigetfile(filetypes, 'Select the EEG file ');
 if ~ischar(filename); return; end;
 dispinfo ('Loading signal...',1);
 
+fileext = regexp(filename,'\..+$','match');
 try
-    if strcmpi(filetype,'edf')
+    if strcmpi(fileext,'.edf')
         EEG = pop_biosig (fullfile(filepath,filename),'importevent','off','importannot','off');
         Sig = eeg2sig (EEG,filepath,filename);
-    elseif strcmpi(filetype,'ns5')
+    elseif strcmpi(fileext,'.ns5')
         NSX = openNSx (fullfile(filepath,filename));
         Sig = nsx2sig (NSX);
-    elseif strcmpi(filetype,'fif')
+    elseif strcmpi(fileext,'.fif')
         Sig = openfif2sig (filepath, filename);        
     else
         warning ('Filetype unrecognized in pop_loadrawsig');

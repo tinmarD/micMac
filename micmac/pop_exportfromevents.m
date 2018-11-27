@@ -42,7 +42,7 @@ cb_chansel = [
     'set(gcbf,''userdata'',chanselpos);',...
     ];
 
-output_formats = {'.edf','.dat'};
+output_formats = {'.mat','binary (int8)','binary (int16)'};
 geometry = {[6,1],[3,3,1],[3,3,1],[3,3,1],[3,3,1],[3,3,1],[1],[1,3,1]};
 uilist   = {...
     {},{'Style','text','String','Include'},...
@@ -100,38 +100,36 @@ if ~isempty(results)
         % signal by rejecting/including event parts.
         % Call rejectevents which can construct a new
         [~,~,~,Sig_ev_merged] = rejectevents(VI, ALLWIN, ALLSIG, Sig.id, Events_sel, ~include_ev, 0);
-        EEG_ev_merged = sig2eeg(Sig_ev_merged);
-        EEG_ev_merged = pop_select(EEG_ev_merged,'channel',chanselpos);
-        [filename, pathname] = uiputfile('.edf','Select file location');
-        if filename
-            if strcmpi(ext_str, '.edf')
-                pop_writeeeg(EEG_ev_merged,fullfile(pathname,filename),'TYPE','EDF');
-            elseif strcmpi(ext_str, '.dat')
-                data = EEG_part_i.data;
-                save(fullfile(dirname, filename_i),'data');
-            end
+        data_merged = Sig_ev_merged.data(chanselpos, :);
+%         EEG_ev_merged = sig2eeg(Sig_ev_merged);
+%         EEG_ev_merged = pop_select(EEG_ev_merged,'channel',chanselpos);
+        dirname = uigetdir('Select Output Directory');
+        out_filename = get_output_filename(Sig_ev_merged.filename, ext_str, Events_sel(1).type, include_ev, mergeparts, 0);
+        if dirname
+            exportdatasubfun(data_merged, ext_str, dirname, out_filename);
         end
     % else, if user want to eport the file part by part, get the time range
     % of each part from the events and the original file (it differs weither
     % include_ev is 1 or 0 
     else
         dirname = uigetdir('Select Output Directory');
-        EEG_ori = sig2eeg(Sig);
-        EEG_ori = pop_select(EEG_ori,'channel',chanselpos);
+        data_chansel = Sig.data(chanselpos, :);
         for i = 1:length(Events_sel)
             ev_i = Events_sel(i);
             if include_ev
-                t_start_i = max(EEG_ori.xmin, ev_i.tpos);
-                t_end_i = min(EEG_ori.xmax, ev_i.tpos+ev_i.duration);
-                if t_end_i > EEG_ori.xmax
+                t_start_i = ev_i.tpos;
+                t_end_i = ev_i.tpos+ev_i.duration;
+                t_start_i_samp = max(1,round(1+t_start_i*Sig.srate));
+                t_end_i_samp = min(round(1+t_end_i*Sig.srate), Sig.npnts);
+                if t_start_i > Sig.tmax
                     dispinfo('Event time higher than signal duration');
                 else
-                    EEG_part_i = pop_select(EEG_ori, 'time', [t_start_i, t_end_i]);
+                    data_part_i = data_chansel(:, t_start_i_samp:t_end_i_samp);
                 end
             % Export periods between events
             else
                 if i == 1
-                    if ev_i.tpos > EEG_ori.xmin
+                    if ev_i.tpos > Sig.tmin
                         t_start_i = 0;
                         t_end_i = ev_i.tpos;
                     else 
@@ -142,64 +140,30 @@ if ~isempty(results)
                     t_start_i = Events_sel(i-1).tpos + Events_sel(i-1).duration;
                     t_end_i = ev_i.tpos;
                 end
-                if t_end_i > EEG_ori.xmax
+                t_start_i_samp = max(1,round(1+t_start_i*Sig.srate));
+                t_end_i_samp = min(round(1+t_end_i*Sig.srate), Sig.npnts);
+                if t_end_i > Sig.tmax
                     dispinfo('Event time higher than signal duration');
                 else
-                    EEG_part_i = pop_select(EEG_ori, 'time', [t_start_i, t_end_i]);
+                    data_part_i = data_chansel(:, t_start_i_samp:t_end_i_samp);
                 end
             end
+            % Create output filename
+            out_filename_i = get_output_filename(Sig.filename, ext_str, Events_sel(1).type, include_ev, mergeparts, i);
             % Export signal part
-            try
-                ext_pos = regexp(EEG_ori.filename,'\..+$');
-                if ~include_ev
-                    filename_i = [EEG_ori.filename(1:ext_pos-1),'-',Events_sel(1).type,'-reject-',num2str(i),ext_str];
-                else
-                    filename_i = [EEG_ori.filename(1:ext_pos-1),'-',Events_sel(1).type,'-',num2str(i),ext_str];
-                end
-            catch
-                if ~include_ev
-                    filename_i = [EEG_ori.filename,'-',Events_sel(1).type,'-reject-',num2str(i),ext_str];
-                else
-                    filename_i = [EEG_ori.filename,'-',Events_sel(1).type,'-',num2str(i),ext_str];
-                end
-            end
-            if strcmpi(ext_str, '.edf')
-                pop_writeeeg(EEG_part_i,fullfile(dirname,filename_i),'TYPE','EDF');
-            elseif strcmpi(ext_str, '.dat')
-                data = EEG_part_i.data;
-                save(fullfile(dirname, filename_i),'data');
-            end
+            exportdatasubfun(data_part_i, ext_str, dirname, out_filename_i);
         end
         % Period between the last event and the end of the signal
-        if ~include_ev && (Events_sel(end).tpos + Events_sel(end).duration) < EEG_ori.xmax
+        if ~include_ev && (Events_sel(end).tpos + Events_sel(end).duration) < Sig.tmax
             t_start_i = Events_sel(end).tpos + Events_sel(end).duration;
-            t_end_i = EEG_ori.xmax;
-            EEG_part_i = pop_select(EEG_ori, 'time', [t_start_i, t_end_i]);
-            try
-                ext_pos = regexp(EEG_ori.filename,'\..+$');
-                if ~include_ev
-                    filename_i = [EEG_ori.filename(1:ext_pos-1),'-',Events_sel(1).type,'-reject-',num2str(i+1),ext_str];
-                else
-                    filename_i = [EEG_ori.filename(1:ext_pos-1),'-',Events_sel(1).type,'-',num2str(i+1),ext_str];
-                end
-            catch
-                if ~include_ev
-                    filename_i = [EEG_ori.filename,'-',Events_sel(1).type,'-reject-',num2str(i+1),ext_str];
-                else
-                    filename_i = [EEG_ori.filename,'-',Events_sel(1).type,'-',num2str(i+1),ext_str];
-                end
-            end
-            if strcmpi(ext_str, '.edf')
-                pop_writeeeg(EEG_part_i,fullfile(dirname,filename_i),'TYPE','EDF');
-            elseif strcmpi(ext_str, '.dat')
-                data = EEG_part_i.data;
-                save(fullfile(dirname, filename_i),'data');
-            end
-            
+            t_end_i = Sig.tmax;
+            t_start_i_samp = max(1,round(1+t_start_i*Sig.srate));
+            t_end_i_samp = min(round(1+t_end_i*Sig.srate), Sig.npnts);
+            data_part_i = data_chansel(:, t_start_i_samp:t_end_i_samp);
+            out_filename_i = get_output_filename(Sig.filename, ext_str, Events_sel(1).type, include_ev, mergeparts, i+1);
+            exportdatasubfun (data_part_i, ext_str, dirname, out_filename_i);
         end
     end
-    
-    
 end
 
 
@@ -207,4 +171,63 @@ end
 end
 
 
+function exportdatasubfun(data, ext_str, output_dir, filename)
+    if strcmpi(ext_str,'binary (int8)')
+        ext_str = '.dat';
+        prec = 'int8';
+    elseif strcmpi(ext_str,'binary (int16)')
+        ext_str = '.dat';
+        prec = 'int16';
+    end
+    if nargin < 4
+        filename = [Sig.desc, ext_str];
+    end
+%     if strcmpi(ext_str,'.edf')
+%         pop_writeeeg(EEG,fullfile(output_dir,filename),'TYPE','EDF');
+    if strcmpi(ext_str,'.mat')
+        save(fullfile(output_dir,filename),'data'); 
+    elseif strcmpi(ext_str,'.dat')
+        fid = fopen(fullfile(output_dir,filename),'w');
+        fwrite(fid,data,prec);
+        fclose(fid);
+    end
+end
 
+
+function filename_out = get_output_filename(filename_in, ext_str, event_type, include_ev, merge_parts, i_part)
+    filename_out = [];
+    if strcmpi(ext_str,'binary (int8)') || strcmpi(ext_str,'binary (int16)')
+        ext_str = '.dat';
+    end
+    if merge_parts
+        ext_pos = regexp(filename_in,'\..+$');
+        if ~isempty(ext_pos)
+            if ~include_ev
+                filename_out = [filename_in(1:ext_pos-1),'_',event_type,'_reject_merged',ext_str];
+            else
+                filename_out = [filename_in(1:ext_pos-1),'_',event_type,'_merged',ext_str];
+            end
+        else
+            if ~include_ev
+                filename_out = [filename_in,'_',event_type,'_reject_merged',ext_str];
+            else
+                filename_out = [filename_in,'_',event_type,'_merged',ext_str];
+            end
+        end
+    else
+        ext_pos = regexp(filename_in,'\..+$');
+        if ~isempty(ext_pos)
+            if ~include_ev
+                filename_out = [filename_in(1:ext_pos-1),'_',event_type,'_reject_',num2str(i_part),ext_str];
+            else
+                filename_out = [filename_in(1:ext_pos-1),'_',event_type,'_',num2str(i_part),ext_str];
+            end
+        else
+            if ~include_ev
+                filename_out = [filename_in,'_',event_type,'_reject_',num2str(i_part),ext_str];
+            else
+                filename_out = [filename_in,'_',event_type,'_',num2str(i_part),ext_str];
+            end
+        end
+    end
+end

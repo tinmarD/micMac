@@ -1,6 +1,6 @@
-function [type_col_sel, time_col_sel, chanind_col_sel, duration_col_sel, zero_index_chan] = autodetecteventfields_cb(filepath)
+function [type_col_sel, time_col_sel, chanind_col_sel, duration_col_sel, zero_index_chan, sep_sel] = autodetecteventfields_cb(filepath)
 % [type_col_sel, time_col_sel, chanind_col_sel, duration_col_sel, 
-%  zero_index_chan] = AUTODETECTEVENTFIELDS_CB(filepath)
+%  zero_index_chan, sep_sel] = AUTODETECTEVENTFIELDS_CB(filepath)
 %   Read an external event files and search the type column, the time
 %   column, the channel index column and the duration column based on the 
 %   header (first line of the file). For the detection to work, the first
@@ -15,7 +15,7 @@ type_col_sel=-1; time_col_sel=-1; chanind_col_sel=-1; duration_col_sel=-1;
 zero_index_chan = 0;
 
 type_cols = {'type'};
-time_cols = {'time','tpos','latency'};
+time_cols = {'tstart','time','tpos','latency','t_pos','t_start'};
 chanind_cols = {'channelind','chind','chanind', 'channel', 'chan'};
 duration_cols = {'duration','durée','duree'};
 
@@ -49,10 +49,10 @@ header_fields = regexp(header,sep_sel,'split');
 
 %- Go through each column name and see if it match one of the needed fields
 for i = 1:length(header_fields)
-    type_col = find(strcmpi(header_fields{i},type_cols));
-    time_col = find(strcmpi(header_fields{i},time_cols));
-    chanind_col = find(strcmpi(header_fields{i},chanind_cols));
-    duration_col = find(strcmpi(header_fields{i},duration_cols));
+    type_col = cell2mat(regexp(header_fields{i}, type_cols));
+    time_col = cell2mat(regexp(header_fields{i}, time_cols));
+    chanind_col = cell2mat(regexp(header_fields{i}, chanind_cols));
+    duration_col = cell2mat(regexp(header_fields{i}, duration_cols));
     if ~isempty(type_col)
         type_col_sel = i;
     end

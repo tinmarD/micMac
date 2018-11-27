@@ -17,7 +17,10 @@ filename = raw_epoch.info.filename(seps(end)+1:end);
 Sig = s_emptysig();
 Sig.srate           = raw_epoch.info.sfreq;
 Sig.type            = 'epoch';
-Sig.data            = 1E6*raw_epoch.data;
+Sig.data            = raw_epoch.data;
+if max(Sig.data(:)) > 1
+    Sig.data = Sig.data / 1E6;
+end
 Sig.filename        = filename;
 Sig.filepath        = dirpath;
 Sig.nchan           = raw_epoch.info.nchan;

@@ -1,12 +1,12 @@
-function [VI, ALLWIN, ALLSIG] = pop_exportdata (VI, ALLWIN, ALLSIG)
-% [VI, ALLWIN, ALLSIG] = POP_EXPORTDATA (VI, ALLWIN, ALLSIG)
-% Popup window to export data to a matlab array.
+function [VI, ALLWIN, ALLSIG] = pop_exportdatatoedf (VI, ALLWIN, ALLSIG)
+% [VI, ALLWIN, ALLSIG] = POP_EXPORTDATATOEDF (VI, ALLWIN, ALLSIG)
+% Popup window to export data to an edf file.
 % Allow temporal selection and channel selection. Channel selection can be
 % done either manually or through the channel selection popup.
 % If manual and graphical channel selection are in conflict, the graphical
 % selection is kept.
 %
-% See also : pop_exportdatatoedf
+% See also : pop_exportdata
 
 [SigCont,~,~,~,sigdesc] = getsignal (ALLSIG,'type','continuous');
 if isempty(SigCont)
@@ -28,12 +28,13 @@ cb_chansel = [
     'sigdesc    = get(findobj(gcbf, ''tag'', ''rawsigs''),''String'');',...
     'pos        = get(findobj(gcbf, ''tag'', ''rawsigs''),''Value'');',...
     '[~,sigpos] = getsigfromdesc (ALLSIG, sigdesc{pos});',...
-    'chanselpos = pop_channelselect(ALLSIG(sigpos),1,1,chanselpos);',...
-    'set(findobj(''tag'',''chanseledit''),''String'',[''['',num2str(chanselpos),'']'']);',...
+    'chanselpos = pop_channelselect(ALLSIG(sigpos),0,1,chanselpos);',...
     'set(gcbf,''userdata'',chanselpos);',...
+    'set(findobj(''tag'',''chanseledit''),''String'',[''['',num2str(chanselpos),'']'']);',...
     ];
 
-geometry = {[1,1],[1,1],[1,1],[1],[1,3,1]};
+output_formats = {'.edf','.mat','binary (int8)','binary (int16)'};
+geometry = {[1,1],[1,1],[1,1],[1,1],[1],[1,3,1]};
 uilist   = {...
     {'Style','text','String','Signal :'},...
     {'Style','popupmenu','String',sigdesc,'tag','rawsigs','Callback',cb_sigchanged},...
@@ -41,11 +42,13 @@ uilist   = {...
     {'Style','edit','String','','tag','chanseledit'},...
     {'Style','text','String','Data range (default All) :'},...
     {'Style','edit','String',datarangedefault,'tag','datarangesel'},...
+    {'Style','text','String','Output Format :'},...
+    {'Style','popupmenu','String',output_formats},...
     {},...
     {},{'Style','pushbutton','String','Channel Selection','Callback',cb_chansel},{},...
 };
 
-[results,chanselpos] = inputgui (geometry, uilist, 'title', 'Export data');
+[results,chanselpos] = inputgui (geometry, uilist, 'title', 'Export data (EDF)');
 
 if ~isempty(results)
     sigind      = results{1};
@@ -54,22 +57,18 @@ if ~isempty(results)
     rangesel    = str2double(regexp(rangesel,'\d+','match'));
     if length(rangesel)>2; rangesel=[rangesel(1),rangesel(end)]; end;
     Sig         = SigCont(sigind);
-    
-    %- Temporal selection
+    ext_str     = output_formats{results{4}};
     if isempty(rangesel); rangesel=[0,Sig.tmax]; end;
-    rangeselind     = 1+rangesel*Sig.srate;
-    rangeselind(1)  = max(rangeselind(1),1);
-    rangeselind(2)  = min(rangeselind(2),Sig.npnts);
-    
-   	%- Channel selection
+    %- Channel selection
     if isempty(chanselpos)
-        if isempty(chanselman); 
+        if isempty(chanselman);
             chanselman=1:Sig.nchan; 
         else
             try
                 chanselman = eval(['[',chanselman,']',]);
             catch
                 chanselman=1:Sig.nchan;
+                warning('Error evaluating channel selection');
             end
         end
         chanselman(chanselman<1)=[];
@@ -77,20 +76,34 @@ if ~isempty(results)
         if isempty(chanselman); return; end;
         chanselpos = chanselman;
     end
-    
-    exportdirpath   = uigetdir('','Select a directory to export data');
-    if isempty(exportdirpath); return; end;
-    
-    exportdirpath   = fullfile(exportdirpath,[Sig.desc,'_data']);
-    if ~mkdir(exportdirpath); 
-        msgbox('Could not create directory');
-        return;
+
+    EEG = sig2eeg(Sig);
+    EEG = pop_select(EEG,'channel',chanselpos,'time',rangesel);
+
+    if strcmpi(ext_str,'binary (int8)')
+        ext_str = '.dat';
+        prec = 'int8';
+    elseif strcmpi(ext_str,'binary (int16)')
+        ext_str = '.dat';
+        prec = 'int16';
     end
-    for iChan=1:length(chanselpos)
-        data            = Sig.data(chanselpos(iChan),rangeselind(1):rangeselind(2));
-        channame        = Sig.channames{chanselpos(iChan)};
-        save(fullfile(exportdirpath,[Sig.desc,'_',channame]),'data');
-    end
+
+    output_dir = uigetdir('Select output directory');
+    output_filename = [Sig.desc, ext_str];
+    
+    if output_dir
+        if strcmpi(ext_str,'.edf')
+            pop_writeeeg(EEG,fullfile(output_dir,output_filename),'TYPE','EDF');
+        elseif strcmpi(ext_str,'.mat')
+            data = EEG.data;
+            save(fullfile(output_dir,output_filename),'data'); 
+        elseif strcmpi(ext_str,'.dat')
+            fid = fopen(fullfile(output_dir,output_filename),'w');
+            fwrite(fid,EEG.data,prec);
+            fclose(fid);
+        end
+    end        
+ 
 end
     
 end

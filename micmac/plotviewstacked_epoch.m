@@ -44,7 +44,7 @@ if isempty(tind); return; end;
 tvect   = (tind-1)/Sig.srate;
 
 % Modify data to be plot in one axes
-data    = Sig.data (chansel,:);           % Select channels
+data    = Sig.data (chansel,:)*1E6;           % Select channels
 data    = data.*(-1+exp(View.gain(visumodepos)));
 % data    = shiftdim(data,1);  % Shift dimensions from [n_trials, n_chan, n_pnts] to [n_chan, n_pnts, n_trials]
 % data_2d = data(:,:);

@@ -74,7 +74,7 @@ elseif strcmp(type,'continuous')
 elseif strcmp(type,'epoch')
     Sig.data            = shiftdim(Sig.data, 1); % For epoch, turn data from 3D to 2D
     Sig.data            = Sig.data(:,:);
-    Sig.npnts           = size(data,3)*size(data,2);
+    Sig.npnts           = size(data,3)*size(data,1);
 %     Sig.npnts           = size(data,3);
     Sig.ntrials         = size(data,1);
     Sig.nchan           = size(data,2);

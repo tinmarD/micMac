@@ -28,10 +28,8 @@ if isempty(Win.views)
     set (findobj(ALLWIN(winnb).figh,'Style','listbox','tag','chansellb'),'String','');
     return; 
 end
-
 figure (Win.figh);
 figpos = get(Win.figh,'Position');
-tic;
 switch Win.visumode
     
     case 1 % "Stacked Mode" - Plot all view one after the other
@@ -160,7 +158,6 @@ switch Win.visumode
             end
         end
 end
-toc;
 %- Keep track of the handles of axis
 ALLWIN(winnb).axlist = ax;
 

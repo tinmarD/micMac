@@ -23,7 +23,6 @@ try
     if strcmpi(type,'mne')
         MNEepoch = fiff_read_epochs(fullfile(filepath,filename));
         Sig = mneepoch2sig (MNEepoch);
-        Sig.data = Sig.data / 1E6;
     elseif strcmpi(filetype,'eeglab')
         disp('TOOD');
     else
@@ -58,6 +57,8 @@ if ~isempty(Sig)
         Sig.srate, 'epoch', Sig.tmin, Sig.tmax, Sig.filename, Sig.filepath, montagedef, sigdescdef, 1, -1, []);
     assignin ('base','ALLSIG',ALLSIG);
     assignin ('base','VI',VI);
+    %- Add events for each epoch
+    VI = addmneepochevents (VI, ALLWIN, ALLSIG, MNEepoch, sigid);
 
     for w=1:VI.nwin; windowsnb{w}=w; end;
     cb_winchanged = [
