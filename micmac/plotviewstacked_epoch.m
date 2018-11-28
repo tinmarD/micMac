@@ -81,6 +81,30 @@ set (gca, 'YTick', -flipdim(spacingvect,1),'YTickLabel',Sig.channamesnoeeg(flipl
 set (gca, 'XColor', vi_graphics('xtickcolor'));
 set (gca, 'Color', vi_graphics('plotbackgroundcolor'), 'Fontsize', 8);
 
+
+% Epoch-specific
+% Plot one horizontal bar per epoch at the bottom of the graph 
+ylims       = ylim;
+axis_min = ylims(1);
+first_ytick = min(get(gca,'ytick'));
+epoch_duration = Sig.npnts/Sig.ntrials/Sig.srate;
+epoch_start_num = max(1,floor(tvect(1) / epoch_duration));
+epoch_end_num = min(Sig.ntrials,ceil(tvect(end) / epoch_duration));
+y_epoch = axis_min+0.1*(first_ytick-axis_min);
+y_epoch_height = 0.1*(first_ytick-axis_min);
+y_offsets = [0,y_epoch_height];
+for i = epoch_start_num:epoch_end_num
+    t_start_i = max(tvect(1),(i-1)*epoch_duration);
+    t_end_i = min(tvect(end),i*epoch_duration);
+    if t_end_i<t_start_i; continue; end;
+    y_start = y_epoch+y_offsets(1+mod(i,2));
+    y_end = y_epoch+y_offsets(1+mod(i,2))+y_epoch_height;
+    fill([t_start_i,t_end_i,t_end_i,t_start_i],[y_start,y_start,y_end,y_end],'c');
+    if (t_end_i-t_start_i) > 0.5*epoch_duration
+        text(t_start_i+0.4*(t_end_i-t_start_i),y_start+0.5*(y_end-y_start),VI.eventall(i).type);
+    end
+end
+
 %- Display amplitude scale
 xlims       = xlim; 
 ylims       = ylim;
@@ -96,8 +120,6 @@ plot ([ampscalex,ampscalex],[ampscaley,ampscaley+scaleampg],...
     'color',vi_graphics('scaleampcolor'),'Linewidth',2);
 text (xlims(1)+0.015*diff(xlims),ampscaley+0.5*(scaleampg),[num2str(scaleamp),' uV']);
 
-
-
 %- Display the name (description) of the signal at the top
 textinter = get(0,'defaulttextinterpreter');
 set (0,'defaulttextinterpreter','none');
@@ -106,3 +128,4 @@ axespospx = get (gca, 'Position');
 text (10,axespospx(4)-10, Sig.desc, 'units','pixels',...
     'fontangle','italic','fontsize',8);
 set (0,'defaulttextinterpreter',textinter);
+
