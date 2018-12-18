@@ -20,7 +20,9 @@ end
 % menu)
 delete (findobj(ALLWIN(winnb).figh,'type','uicontextmenu'));
  
-dispinfo('');
+try
+    dispinfo('');
+end
 
 if isempty(Win.views)
     set (findobj(ALLWIN(winnb).figh,'Style','edit','tag','obswintedit'),'String','');

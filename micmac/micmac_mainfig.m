@@ -40,6 +40,8 @@ if ismain
         'if isempty([ALLWIN.views]) || vi_questui(''Quit micMac'',''micMac'')==1;',...
         'for h=VI.figh;delete(h);end;',...
         'eventwin = findobj(''tag'',''eventwindow'');',...
+        'try;[dirpath, ~] = fileparts(which(''micmac''));catch;dirpath=''.'';end;',...
+        'exporteventstofile(VI, dirpath, ''events_backup.csv'');',...
         'if ~isempty(eventwin); delete(eventwin); end;'...
         'clear VI ALLSIG ALLWIN h; end;',...
         'catch; delete(gcbf); end;',...
@@ -81,12 +83,14 @@ if 1%ismain
     cb_loadrawsigedf    = '[VI, ALLWIN, ALLSIG] = pop_loadrawsig        (VI, ALLWIN, ALLSIG, ''EDF'');';
     cb_loadrawsigns5    = '[VI, ALLWIN, ALLSIG] = pop_loadrawsig        (VI, ALLWIN, ALLSIG, ''NS5'');';
     cb_loadrawsigfif    = '[VI, ALLWIN, ALLSIG] = pop_loadrawsig        (VI, ALLWIN, ALLSIG, ''FIF'');';
+    cb_loadrawsigtrc    = '[VI, ALLWIN, ALLSIG] = pop_loadrawsig        (VI, ALLWIN, ALLSIG, ''TRC'');';
     cb_loadeventsig     = '[VI, ALLWIN, ALLSIG] = pop_loadeventsig      (VI, ALLWIN, ALLSIG);';
     cb_loadmneepochs    = '[VI, ALLWIN, ALLSIG] = pop_loadepochs        (VI, ALLWIN, ALLSIG, ''mne'');';
     cb_loadeeglabepochs = '[VI, ALLWIN, ALLSIG] = pop_loadepochs        (VI, ALLWIN, ALLSIG, ''eeglab'');';
     cb_exportdata       = '[VI, ALLWIN, ALLSIG] = pop_exportdata        (VI, ALLWIN, ALLSIG);';
     cb_exportdatabychan = '[VI, ALLWIN, ALLSIG] = pop_exportdatabychannel   (VI, ALLWIN, ALLSIG);';
     cb_exportfromevents = '[VI, ALLWIN, ALLSIG] = pop_exportfromevents  (VI, ALLWIN, ALLSIG);';
+    cb_exportepochs     = '[VI, ALLWIN, ALLSIG] = pop_exportepochs      (VI, ALLWIN, ALLSIG);';
     cb_filtersig        = '[VI, ALLWIN, ALLSIG] = pop_filtersignal      (VI, ALLWIN, ALLSIG);';
     cb_newmontage       = '[VI, ALLWIN, ALLSIG] = pop_newmontage        (VI, ALLWIN, ALLSIG);';
     cb_kteooperator     = '[VI, ALLWIN, ALLSIG] = pop_kteooperator      (VI, ALLWIN, ALLSIG);';
@@ -107,6 +111,7 @@ if 1%ismain
     cb_addevent         = '[VI, ALLWIN, ALLSIG] = pop_addevent          (VI, ALLWIN, ALLSIG);';
     cb_addeventoptions  = '[VI, ALLWIN, ALLSIG] = pop_addeventoptions   (VI, ALLWIN, ALLSIG);';
     cb_freqestimation   = '[VI, ALLWIN, ALLSIG] = freqestimation        (VI, ALLWIN, ALLSIG);';
+    cb_createepochsfromevents = '[VI, ALLWIN, ALLSIG] = pop_createepochsfromevents (VI, ALLWIN, ALLSIG);';
     cb_importmicmacevents= 'VI                  = importeventsfromfile  (VI,1);';
     cb_importanywaveevents='[VI, ALLWIN, ALLSIG]= pop_importanywaveevents(VI, ALLWIN, ALLSIG);';
     cb_importextevents  = '[VI, ALLWIN, ALLSIG] = pop_importexternalevents(VI,ALLWIN,ALLSIG);';
@@ -140,6 +145,7 @@ if 1%ismain
     uimenu (sig_load_m,'Label','EDF Files / Biosig','Callback',cb_loadrawsigedf);
     uimenu (sig_load_m,'Label','NS5 Files / Blackrock','Callback',cb_loadrawsigns5);
     uimenu (sig_load_m,'Label','FIF Files','Callback',cb_loadrawsigfif);
+    uimenu (sig_load_m,'Label','TRC Files','Callback',cb_loadrawsigtrc);
     uimenu (sig_load_m,'Label','Event Signal','Callback',cb_loadeventsig,'Separator','on');
     uimenu (sig_load_m,'Label','MNE epochs','Callback',cb_loadmneepochs,'Separator','on');
     uimenu (sig_load_m,'Label','EEGLAB epochs','Callback',cb_loadeeglabepochs);
@@ -147,6 +153,7 @@ if 1%ismain
     uimenu (sig_export_m,'Label','Export Data','Callback',cb_exportdata);
     uimenu (sig_export_m,'Label','Export Data (by channel)','Callback',cb_exportdatabychan);
     uimenu (sig_export_m,'Label','Export from Events','Callback',cb_exportfromevents,'Separator','on');
+    uimenu (sig_export_m,'Label','Export Epochs','Callback',cb_exportepochs,'Separator','on');
     uimenu (sig_m,'Label','New montage','Callback',cb_newmontage,'Separator','on');
     uimenu (sig_m,'Label','Filter signal','Callback',cb_filtersig,'Accelerator','F','Separator','on'); 
     sig_op_m    = uimenu (sig_m,'Label','Operators');
@@ -172,6 +179,7 @@ if 1%ismain
     uimenu (events_m, 'Label', 'Frequency Estimation', 'Callback', cb_freqestimation);
     uimenu (events_m, 'Label', 'Hide Events (h)', 'Callback', cb_hideevents);
     uimenu (events_m, 'Label', 'Display/Hide Event Info', 'Callback', cb_dispeventinfo);
+    uimenu (events_m, 'Label', 'Create Epochs from Events', 'Callback', cb_createepochsfromevents);
     events_import_m = uimenu (events_m, 'Label', 'Import', 'Separator', 'on');
     uimenu (events_import_m, 'Label', 'micMac events', 'Callback', cb_importmicmacevents);
     uimenu (events_import_m, 'Label', 'Anywave\Delphos events', 'Callback', cb_importanywaveevents);

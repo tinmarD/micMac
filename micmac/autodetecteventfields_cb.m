@@ -25,59 +25,87 @@ if ~exist(filepath,'file')
     return;
 end
 
-%- open the file
-fid = fopen(fullfile(filepath), 'r');
-%- Read first lines
-header = fgets(fid);
+%- Excel file (.xlsx)
+if ~isempty(regexp(filepath, '\.xlsx$', 'once'))
+    [~,txt,~] = xlsread(filepath);
+    header_fields = {txt{1,:}};
+    %- Go through each column name and see if it match one of the needed fields
+    for i = 1:length(header_fields)
+        type_col = cell2mat(regexp(header_fields{i}, type_cols));
+        time_col = cell2mat(regexp(header_fields{i}, time_cols));
+        chanind_col = cell2mat(regexp(header_fields{i}, chanind_cols));
+        duration_col = cell2mat(regexp(header_fields{i}, duration_cols));
+        if ~isempty(type_col)
+            type_col_sel = i;
+        end
+        if ~isempty(time_col)
+            time_col_sel = i;
+        end
+        if ~isempty(chanind_col)
+            chanind_col_sel = i;
+        end
+        if ~isempty(duration_col)
+            duration_col_sel = i;
+        end
+    end
+    sep_sel = '';
+    zero_index_chan = 0;
+    
+%- csv and txt files   
+else
+    %- open the file
+    fid = fopen(fullfile(filepath), 'r');
+    %- Read first lines
+    header = fgets(fid);
 
-%- Try to detect the separator between [tab, ',', ';', space]
-seps = {char(9), ',', ';', ' '};
-sep_sel_pos = [];
-sep_sel = '';
-for sep = seps
-    sep_pos_i = strfind(header,sep{1});
-    if length(sep_pos_i) > length(sep_sel_pos)
-        sep_sel_pos = sep_pos_i;
-        sep_sel = sep{1};
+    %- Try to detect the separator between [tab, ',', ';', space]
+    seps = {char(9), ',', ';', ' '};
+    sep_sel_pos = [];
+    sep_sel = '';
+    for sep = seps
+        sep_pos_i = strfind(header,sep{1});
+        if length(sep_pos_i) > length(sep_sel_pos)
+            sep_sel_pos = sep_pos_i;
+            sep_sel = sep{1};
+        end
     end
-end
-if isempty(sep_sel_pos)
-    msgbox('Could not determine the separator');
-end
+    if isempty(sep_sel_pos)
+        dispinfo('Could not determine the separator');
+    end
 
-header_fields = regexp(header,sep_sel,'split');
+    header_fields = regexp(header,sep_sel,'split');
 
-%- Go through each column name and see if it match one of the needed fields
-for i = 1:length(header_fields)
-    type_col = cell2mat(regexp(header_fields{i}, type_cols));
-    time_col = cell2mat(regexp(header_fields{i}, time_cols));
-    chanind_col = cell2mat(regexp(header_fields{i}, chanind_cols));
-    duration_col = cell2mat(regexp(header_fields{i}, duration_cols));
-    if ~isempty(type_col)
-        type_col_sel = i;
+    %- Go through each column name and see if it match one of the needed fields
+    for i = 1:length(header_fields)
+        type_col = cell2mat(regexp(header_fields{i}, type_cols));
+        time_col = cell2mat(regexp(header_fields{i}, time_cols));
+        chanind_col = cell2mat(regexp(header_fields{i}, chanind_cols));
+        duration_col = cell2mat(regexp(header_fields{i}, duration_cols));
+        if ~isempty(type_col)
+            type_col_sel = i;
+        end
+        if ~isempty(time_col)
+            time_col_sel = i;
+        end
+        if ~isempty(chanind_col)
+            chanind_col_sel = i;
+        end
+        if ~isempty(duration_col)
+            duration_col_sel = i;
+        end
     end
-    if ~isempty(time_col)
-        time_col_sel = i;
-    end
-    if ~isempty(chanind_col)
-        chanind_col_sel = i;
-    end
-    if ~isempty(duration_col)
-        duration_col_sel = i;
-    end
-end
 
-% Read channel ind column if found and try to detect if channel are 0-indexed
-if chanind_col_sel ~= -1
-    line = fgets(fid);
-    while ischar(line)
-        line_fields = regexp(line,sep_sel,'split');
-        chan_pos = line_fields{chanind_col_sel};
-        if chan_pos == 0; zero_index_chan = 1; end
+    % Read channel ind column if found and try to detect if channel are 0-indexed
+    if chanind_col_sel ~= -1
         line = fgets(fid);
+        while ischar(line)
+            line_fields = regexp(line,sep_sel,'split');
+            chan_pos = line_fields{chanind_col_sel};
+            if chan_pos == 0; zero_index_chan = 1; end
+            line = fgets(fid);
+        end
     end
 end
-
 
 end
 

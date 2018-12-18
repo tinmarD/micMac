@@ -1,0 +1,97 @@
+id,type,tpos,duration,channelind,channelname,sigid,sigdesc,rawparentid,centerfreq,color
+45,Stim 50 Hz,147.8569,5,24,EEG C2,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+46,Stim 50 Hz,147.8574,5,23,EEG C1,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+47,Stim 50 Hz,192.5991,5,23,EEG C1,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+48,Stim 50 Hz,192.5991,5,24,EEG C2,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+49,Stim 50 Hz,236.4429,5,26,EEG C4,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+50,Stim 50 Hz,236.4453,5,25,EEG C3,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+51,Stim 50 Hz,283.2298,5,31,EEG C9,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+52,Stim 50 Hz,283.2333,5,32,EEG C10,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+53,Stim 50 Hz,319.1806,5,33,EEG C11,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+54,Stim 50 Hz,319.1806,5,34,EEG C12,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+55,Stim 50 Hz,378.7587,5,1,EEG A1,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+56,Stim 50 Hz,378.7658,5,2,EEG A2,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+57,Stim 50 Hz,599.3257,5,59,EEG T2,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+58,Stim 50 Hz,599.3257,5,58,EEG T1,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+59,Stim 50 Hz,688.6382,5,62,EEG T5,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+60,Stim 50 Hz,688.6389,5,63,EEG T6,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+61,Stim 50 Hz,878.7603,5,18,EEG B4,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+62,Stim 50 Hz,878.7632,5,17,EEG B3,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+63,Stim 50 Hz,945.0535,5,52,EEG OT3,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+64,Stim 50 Hz,945.057,5,53,EEG OT4,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+65,Stim 50 Hz,1044.6387,5,12,EEG A12,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+66,Stim 50 Hz,1044.6387,5,13,EEG A13,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+67,Stim 50 Hz,1089.73,5,8,EEG A8,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+68,Stim 50 Hz,1089.7331,5,9,EEG A9,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+69,Stim 50 Hz,1166.4096,5,38,EEG GPH2,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+70,Stim 50 Hz,1166.4096,5,39,EEG GPH3,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+71,Stim 50 Hz,1231.5132,5,41,EEG GPH5,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+72,Stim 50 Hz,1231.5138,5,42,EEG GPH6,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+73,Stim 50 Hz,1271.8052,5,44,EEG GPH8,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+74,Stim 50 Hz,1271.8076,5,45,EEG GPH9,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+75,Stim 50 Hz,1368.6069,5,54,EEG OT5,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+76,Stim 50 Hz,1368.6107,5,55,EEG OT6,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+77,Stim 50 Hz,1463.0356,5,61,EEG T4,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+78,Stim 50 Hz,1463.0356,5,60,EEG T3,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+79,Stim 50 Hz,1756.9801,5,76,EEG OP3,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+80,Stim 50 Hz,1756.988,5,77,EEG OP4,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+81,Stim 50 Hz,1838.4209,5,79,EEG OP6,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+82,Stim 50 Hz,1838.4288,5,80,EEG OP7,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+83,Stim 50 Hz,1881.1768,5,85,EEG PI5,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+84,Stim 50 Hz,1881.1768,5,86,EEG PI6,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+85,Stim 7 Hz,2033.6852,20,66,EEG H2,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+86,Stim 7 Hz,2033.7197,20,65,EEG H1,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+87,Stim 7 Hz,2198.5771,20,15,EEG B1,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+88,Stim 7 Hz,2198.5943,20,16,EEG B2,1,CD25_stim3_clean_clean_raw,1,NaN,0.08        0.17           1
+89,Stim 50 Hz,5,0,24,EEG C2,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+90,Stim 50 Hz,25,0,23,EEG C1,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+91,Stim 50 Hz,45,0,23,EEG C1,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+92,Stim 50 Hz,65,0,24,EEG C2,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+93,Stim 50 Hz,85,0,26,EEG C4,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+94,Stim 50 Hz,105,0,25,EEG C3,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+95,Stim 50 Hz,125,0,31,EEG C9,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+96,Stim 50 Hz,145,0,32,EEG C10,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+97,Stim 50 Hz,165,0,33,EEG C11,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+98,Stim 50 Hz,185,0,34,EEG C12,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+99,Stim 50 Hz,205,0,1,EEG A1,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+100,Stim 50 Hz,225,0,2,EEG A2,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+101,Stim 50 Hz,245,0,59,EEG T2,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+102,Stim 50 Hz,265,0,58,EEG T1,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+103,Stim 50 Hz,285,0,62,EEG T5,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+104,Stim 50 Hz,305,0,63,EEG T6,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+105,Stim 50 Hz,325,0,18,EEG B4,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+106,Stim 50 Hz,345,0,17,EEG B3,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+107,Stim 50 Hz,365,0,52,EEG OT3,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+108,Stim 50 Hz,385,0,53,EEG OT4,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+109,Stim 50 Hz,405,0,12,EEG A12,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+110,Stim 50 Hz,425,0,13,EEG A13,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+111,Stim 50 Hz,445,0,8,EEG A8,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+112,Stim 50 Hz,465,0,9,EEG A9,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+113,Stim 50 Hz,485,0,38,EEG GPH2,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+114,Stim 50 Hz,505,0,39,EEG GPH3,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+115,Stim 50 Hz,525,0,41,EEG GPH5,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+116,Stim 50 Hz,545,0,42,EEG GPH6,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+117,Stim 50 Hz,565,0,44,EEG GPH8,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+118,Stim 50 Hz,585,0,45,EEG GPH9,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+119,Stim 50 Hz,605,0,54,EEG OT5,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+120,Stim 50 Hz,625,0,55,EEG OT6,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+121,Stim 50 Hz,645,0,61,EEG T4,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+122,Stim 50 Hz,665,0,60,EEG T3,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+123,Stim 50 Hz,685,0,76,EEG OP3,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+124,Stim 50 Hz,705,0,77,EEG OP4,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+125,Stim 50 Hz,725,0,79,EEG OP6,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+126,Stim 50 Hz,745,0,80,EEG OP7,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+127,Stim 50 Hz,765,0,85,EEG PI5,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+128,Stim 50 Hz,785,0,86,EEG PI6,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+129,Stim 7 Hz,805,0,66,EEG H2,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+130,Stim 7 Hz,825,0,65,EEG H1,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+131,Stim 7 Hz,845,0,15,EEG B1,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+132,Stim 7 Hz,865,0,16,EEG B2,2,CD25_stim3_clean_clean_raw-epoch,2,NaN,0.08        0.17           1
+173,Stim 7 Hz,3,0,66,EEG H2,7,CD25_stim3_clean_clean_raw-Stim 7 Hz-epoch,7,NaN,0.08        0.17           1
+174,Stim 7 Hz,12,0,65,EEG H1,7,CD25_stim3_clean_clean_raw-Stim 7 Hz-epoch,7,NaN,0.08        0.17           1
+175,Stim 7 Hz,21,0,15,EEG B1,7,CD25_stim3_clean_clean_raw-Stim 7 Hz-epoch,7,NaN,0.08        0.17           1
+176,Stim 7 Hz,30,0,16,EEG B2,7,CD25_stim3_clean_clean_raw-Stim 7 Hz-epoch,7,NaN,0.08        0.17           1
+177,Stim 7 Hz,39,0,66,EEG H2,7,CD25_stim3_clean_clean_raw-Stim 7 Hz-epoch,7,NaN,0.08        0.17           1
+178,Stim 7 Hz,48,0,65,EEG H1,7,CD25_stim3_clean_clean_raw-Stim 7 Hz-epoch,7,NaN,0.08        0.17           1
+179,Stim 7 Hz,57,0,15,EEG B1,7,CD25_stim3_clean_clean_raw-Stim 7 Hz-epoch,7,NaN,0.08        0.17           1
+180,Stim 7 Hz,66,0,16,EEG B2,7,CD25_stim3_clean_clean_raw-Stim 7 Hz-epoch,7,NaN,0.08        0.17           1

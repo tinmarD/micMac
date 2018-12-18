@@ -76,8 +76,8 @@ elseif strcmp(type,'epoch')
     Sig.data            = Sig.data(:,:);
     Sig.npnts           = size(data,3)*size(data,1);
 %     Sig.npnts           = size(data,3);
-    Sig.ntrials         = size(data,1);
     Sig.nchan           = size(data,2);
+    Sig.ntrials         = size(data,1);
     Sig.tmax            = (Sig.tmax+abs(Sig.tmin))*Sig.ntrials;
 else
     error(['Wrong signal type: ',type]);

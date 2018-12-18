@@ -59,8 +59,8 @@ if israw
     sigmenuh    = findobj (VI.figh(1),'Label','Signals');
     topmenuh    = uimenu (sigmenuh, 'Label', desc, 'Separator', sepval);
     uimenu (topmenuh, 'Label', 'raw', 'Callback', cb_sigproperty);
-    %- Try the automatic channel correspodency 
-    if sum([ALLSIG.israw]) > 1
+    %- Try the automatic channel correspodency, if not an epoch signal
+    if ~strcmp(type,'epoch') &&  sum([ALLSIG.israw]) > 1
         VI          = chancorrauto (VI, ALLSIG,Sig);
     end
 else

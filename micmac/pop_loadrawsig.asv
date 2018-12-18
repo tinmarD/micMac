@@ -32,7 +32,9 @@ try
     elseif strcmpi(fileext,'.fif')
         Sig = openfif2sig (filepath, filename);        
     elseif strcmpi(fileext,'.trc')
-        Sig = trc2sig (filename, filepath);
+        trc_header = read_micromed_trc(fullfile(filepath,filename));
+        trc_data = read_micromed_trc(fullfile(filepath,filename),1,trc_header.Num_Samples);
+        Sig = trc2sig (trc_header, trc_data);
     else
         warning ('Filetype unrecognized in pop_loadrawsig');
         Sig = [];

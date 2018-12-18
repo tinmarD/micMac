@@ -130,7 +130,14 @@ for i=1:length(ALLWIN)
         end
     end
 
-    ALLWIN(i).ctimet    = Event.tpos+0.5*Event.duration;
+    Sig = getsignal(ALLSIG, 'sigid', Event.sigid);
+    if strcmp(Sig.type,'epoch')
+        epoch_duration = Sig.npnts/Sig.ntrials/Sig.srate;
+        epoch_tpre = abs(Sig.tmin);
+        ALLWIN(i).ctimet = Event.tpos-epoch_tpre+epoch_duration/2;        
+    else
+        ALLWIN(i).ctimet    = Event.tpos+0.5*Event.duration;
+    end
     ALLWIN  = checktimevariables (VI, ALLWIN, ALLSIG, i);
     ALLWIN  = redrawwin(VI,ALLWIN,ALLSIG,i);
 end

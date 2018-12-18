@@ -10,7 +10,7 @@ timeUnitList = {'s','ms'};
 [rawSigInd,rawSigDesc] = getrawsignals(ALLSIG);
 
 cb_loadeventfile = [
-    '[filename,pathname] = uigetfile({''*.txt;*.csv''});',...
+    '[filename,pathname] = uigetfile({''*.txt;*.csv;*.xlsx''});',...
     'set (findobj(gcbf,''tag'',''editfilepath''),''string'',fullfile(pathname,filename))'];
 
 cb_global_ev = [
@@ -104,55 +104,108 @@ if ~isempty(results)
     if isnan(numHeaderLines)
         disp('Number of header lines must be and integer');
     end
-       
     
-    % Open the file in binary mode
-    fid = fopen(fullfile(filepath), 'rb');
-    % Count the number of lines (i.e. events)
-    fseek(fid, 0, 'eof');
-    fileSize = ftell(fid);
-    frewind(fid);
-    % Read the whole file.
-    data = fread(fid, fileSize, 'uint8');
-    % Count number of line-feeds
-    nEvents  = sum(data==10)-numHeaderLines;
-
-    %- Re-open the file
-    fid = fopen(fullfile(filepath), 'r');
-    %- Read header lines
-    while numHeaderLines>0
-        fgets(fid);
-        numHeaderLines = numHeaderLines-1;
-    end
-
     if overwrite
         VI.eventall = [];
         VI.eventsel = [];
         VI.eventpos = 0;
     end
-    
-    % Initiate structure
-    for i=1:nEvents
-        eventLine       = fgets(fid);
-        eventValue      = regexp(eventLine,sep,'split');
-        if length(eventValue)<max(typeCol,latencyCol)
-            dispinfo('Wrong separator, data or position');
-            break;
-        end
-        eventType    	= strtrim(eventValue{typeCol});
-        latency         = str2double(eventValue{latencyCol});
-        switch timeUnit
-            case 'ms'
-                latencySec = latency/1000;
-            case 's'
-                latencySec = latency;
-        end
-        
-        if globEv; chanind_i=-1; else chanind_i=str2double(eventValue{channelCol}); end
-        if discreteEv; duration_i=0; else duration_i=str2double(eventValue{durationCol}); end
-        if chanZeroIndex; chanind_i = chanind_i + 1; end
-        VI = addeventt(VI, ALLWIN, ALLSIG, eventType, latencySec, duration_i, chanind_i, sigId);
 
+    %- Excel file (.xlsx)
+    if ~isempty(regexp(filepath, '\.xlsx$', 'once'))
+        [~,~,raw] = xlsread(filepath);
+        nEvents = size(raw, 1)-1;
+        typeCol = typeCol+1; latencyCol = latencyCol+1; 
+        channelCol = channelCol+1; durationCol = durationCol+1;
+        if size(raw, 2) < max([typeCol,latencyCol,channelCol,durationCol])
+            dispinfo('Wrong separator, data or position');
+            return;
+        end
+        for i=2:nEvents+1
+            eventType = raw{i, typeCol};
+            latency   = raw{i, latencyCol};
+            if ~isnumeric(latency)
+                msgbox('Wrong latency column');
+                return;
+            end
+            switch timeUnit
+                case 'ms'
+                    latencySec = latency/1000;
+                case 's'
+                    latencySec = latency;
+            end
+            if globEv; chanind_i=-1; else chanind_i=raw{i, channelCol}; end
+            if ischar(chanind_i)
+                try
+                    chanind_i = eval(chanind_i);
+                catch
+                    continue;
+                end
+            end
+            if isempty(chanind_i)
+                continue;
+            end
+            if ~isnumeric(chanind_i)
+                msgbox('Wrong channel column');
+                return;
+            end
+            if discreteEv; duration_i=0; else duration_i=raw{i, durationCol}; end
+            if ~isnumeric(duration_i)
+                msgbox('Wrong duration column');
+                return;
+            end
+            if chanZeroIndex; chanind_i = chanind_i + 1; end
+            if length(chanind_i) > 1    
+                for chanind_i_j = chanind_i
+                    VI = addeventt(VI, ALLWIN, ALLSIG, eventType, latencySec, duration_i, chanind_i_j, sigId);
+                end
+            else
+                VI = addeventt(VI, ALLWIN, ALLSIG, eventType, latencySec, duration_i, chanind_i, sigId);
+            end
+        end
+    %- CSV or txt files
+    else
+        % Open the file in binary mode
+        fid = fopen(fullfile(filepath), 'rb');
+        % Count the number of lines (i.e. events)
+        fseek(fid, 0, 'eof');
+        fileSize = ftell(fid);
+        frewind(fid);
+        % Read the whole file.
+        data = fread(fid, fileSize, 'uint8');
+        % Count number of line-feeds
+        nEvents  = sum(data==10)-numHeaderLines;
+
+        %- Re-open the file
+        fid = fopen(fullfile(filepath), 'r');
+        %- Read header lines
+        while numHeaderLines>0
+            fgets(fid);
+            numHeaderLines = numHeaderLines-1;
+        end
+
+        % Initiate structure
+        for i=1:nEvents
+            eventLine       = fgets(fid);
+            eventValue      = regexp(eventLine,sep,'split');
+            if length(eventValue)<max([typeCol,latencyCol,channelCol,durationCol])
+                dispinfo('Wrong separator, data or position');
+                break;
+            end
+            eventType    	= strtrim(eventValue{typeCol});
+            latency         = str2double(eventValue{latencyCol});
+            switch timeUnit
+                case 'ms'
+                    latencySec = latency/1000;
+                case 's'
+                    latencySec = latency;
+            end
+
+            if globEv; chanind_i=-1; else chanind_i=str2double(eventValue{channelCol}); end
+            if discreteEv; duration_i=0; else duration_i=str2double(eventValue{durationCol}); end
+            if chanZeroIndex; chanind_i = chanind_i + 1; end
+            VI = addeventt(VI, ALLWIN, ALLSIG, eventType, latencySec, duration_i, chanind_i, sigId);
+        end
     end
     
     % TODO check doublons, check latencies in addeventt()
