@@ -14,13 +14,14 @@ Principles
 
 micMac works with three basic objects, **Signals**, **Views** and **Windows**. 
 
-A signal is a matlab structure (similar to an EEGLAB dataset) representing a signal. It contains the data, the sampling frequency, the channel names... Signals can be filtered, thresholded or transformed with other operators to create child signals.
+A signal is a Matlab structure (similar to an EEGLAB dataset) representing a signal. It contains the data, the sampling frequency, the channel names... Signals can be filtered, thresholded or transformed with other operators to create child signals.
 
 Views allow to observe these signals. A view is associated with a signal, a visualisation domain, a color, and a gain. The visualisation domain is one of the following:
 
  - Temporal - Observe the signal in the time domain
  - Frequency - Uses a Fourier transform to observe the spectrum over the whole time window. 
  - Time-Frequency - Uses a wavelet transform to represent the frequency content over time. 
+ - Phase - Uses a wavelet transform to estimate the phase - Not fully tested
 
 Windows are where views are placed. Each window can have multiples views. The main window is the leading window, the other windows can synchronize with it.
 

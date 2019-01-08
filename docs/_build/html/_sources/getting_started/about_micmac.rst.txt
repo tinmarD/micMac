@@ -15,6 +15,6 @@ Key Features
 ============
 
 - Ability to switch between global visualization of many channels or precise visualization
-- Multiple windows possibility (useful with multiple screens).
+- Multiple windows possibility (useful with multiple screens) - Not fully tested -
 - Ability to observe multiple signals simultaneously. 
 - Marker system to quickly jump to events of interest. 

@@ -1,6 +1,6 @@
 function [xThreshInd, tStart, tEnd] = thresholdvector(x, Fe, minVal, maxVal)
 %[xThreshInd, tStart, tEnd] = THRESHOLDVECTOR(x, Fe, minVal, maxVal))
-%   Threshold input vecto x. Select data whose amplitude lie between
+%   Threshold input vector x. Select data whose amplitude lie between
 %   minVal and maxVal. Returns the thresholded signal and the time of the
 %   beginning and the end of each thresholded segment.
 %

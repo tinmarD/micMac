@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="micmac 1.0.0 documentation" href="../index.html"/>
         <link rel="next" title="Loading a signal" href="loading_a_signal.html"/>
-        <link rel="prev" title="Interface controls" href="../interface/interface_controls.html"/> 
+        <link rel="prev" title="Input/Output" href="../io/input_output.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -93,19 +93,24 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interface/index.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html">IO</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Signals</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="loading_a_signal.html">Loading a signal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filtering.html">Filtering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="export_data.html">Export Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bad_channels.html">Bad Channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eeg_channels.html">EEG Channels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify_a_signal.html">Modify a Signal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="channel_correspondency.html">Channel Correspondency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resynch_signals.html">Signals Synchronization</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../views/index.html">Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../windows/index.html">Windows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../events/index.html">Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../detectors/index.html">Detectors</a></li>
 </ul>
 
             
@@ -179,10 +184,21 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="loading_a_signal.html">Loading a signal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filtering.html">Filtering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="export_data.html">Export Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="export_data.html">Export Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="export_data.html#export-whole-file">Export whole file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export_data.html#export-from-global-events">Export from global events</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="bad_channels.html">Bad Channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eeg_channels.html">EEG Channels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modify_a_signal.html">Modify a Signal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="channel_correspondency.html">Channel Correspondency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#thresholding">Thresholding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#teager-energy-operators">Teager Energy Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resynch_signals.html">Signals Synchronization</a></li>
 </ul>
 </div>
 </div>
@@ -200,7 +216,7 @@
         <a href="loading_a_signal.html" class="btn btn-neutral float-right" title="Loading a signal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../interface/interface_controls.html" class="btn btn-neutral" title="Interface controls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../io/input_output.html" class="btn btn-neutral" title="Input/Output" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

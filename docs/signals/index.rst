@@ -15,7 +15,9 @@ The **Signals** menu allows to load, filter, transform, export and modify a sign
    filtering
    export_data
    bad_channels
+   eeg_channels
    modify_a_signal   
    channel_correspondency
-
+   operators
+   resynch_signals
 

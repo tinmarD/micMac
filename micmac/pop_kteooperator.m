@@ -1,6 +1,11 @@
 function [VI, ALLWIN, ALLSIG] = pop_kteooperator(VI, ALLWIN, ALLSIG)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%[VI, ALLWIN, ALLSIG] = POP_KTEOOPERATOR(VI, ALLWIN, ALLSIG)
+%   Popup for applying the k-Teager Energy Operator to "filter" the signal.
+%   The Teager Energy Operator (or Teager-Kaiser Energy Operator) is a non
+%   linear operator, powerful for extracting certain type of signal (IEDs for
+%   instance).
+%
+% See also op_kteo, pop_mteooperator
 
 [SigCont,~,~,~,sigdesc] = getsignal (ALLSIG, 'type', 'continuous');
 if isempty(SigCont)

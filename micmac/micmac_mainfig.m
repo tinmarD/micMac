@@ -96,7 +96,7 @@ if 1%ismain
     cb_kteooperator     = '[VI, ALLWIN, ALLSIG] = pop_kteooperator      (VI, ALLWIN, ALLSIG);';
     cb_mteooperator     = '[VI, ALLWIN, ALLSIG] = pop_mteooperator      (VI, ALLWIN, ALLSIG);';
     cb_threshold        = '[VI, ALLWIN, ALLSIG] = pop_threshold         (VI, ALLWIN, ALLSIG);';
-    cb_extractspikes    = '[VI, ALLWIN, ALLSIG] = pop_extractspikes     (VI, ALLWIN, ALLSIG);';
+%     cb_extractspikes    = '[VI, ALLWIN, ALLSIG] = pop_extractspikes     (VI, ALLWIN, ALLSIG);';
     cb_resamplesig      = '[VI, ALLWIN, ALLSIG] = pop_resamplesig       (VI, ALLWIN, ALLSIG);';
     cb_resynchsignals   = '[VI, ALLWIN, ALLSIG] = pop_resynchsignals    (VI, ALLWIN, ALLSIG);';
     cb_cleanlinenoise   = '[VI, ALLWIN, ALLSIG] = pop_cleanlinenoise    (VI, ALLWIN, ALLSIG);';
@@ -158,7 +158,7 @@ if 1%ismain
     uimenu (sig_m,'Label','Filter signal','Callback',cb_filtersig,'Accelerator','F','Separator','on'); 
     sig_op_m    = uimenu (sig_m,'Label','Operators');
     uimenu (sig_op_m,'Label','Threshold','Callback',cb_threshold);
-    uimenu (sig_op_m,'Label','Extract Spikes','Callback',cb_extractspikes);
+%     uimenu (sig_op_m,'Label','Extract Spikes','Callback',cb_extractspikes);
     uimenu (sig_op_m,'Label','k-TEO','Callback',cb_kteooperator);
     uimenu (sig_op_m,'Label','MTEO','Callback',cb_mteooperator);
     sig_clean_m = uimenu (sig_m,'Label', 'Clean signal');

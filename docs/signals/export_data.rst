@@ -2,6 +2,9 @@
     Export Data
 *******************
 
+Export whole file
+------------------
+
 This functionnality allows to export data from a signal in an matlab format (*.mat*). 
 
 Go to **Signals>Export>Export data**. The following window appears:
@@ -20,3 +23,23 @@ Each channel is saved in a seperate file. All the files are automatically stored
 .. note:: 
 
    This way of exporting data allows to load them easily into **Wave_clus** for action potential detection and sorting.
+
+Export from global events
+-------------------------
+
+This menu allow you to extract or reject the signal defined by global events and export it. 
+
+.. figure:: /_images/signals_export_from_events.png
+   :align: center
+
+Select the type of event you want to reject or select. If you need to include the events parts, check the Include checkbox. Select the signal from which the data will be extracted. Check the *Merge* button to merge all the event parts together (or the part between events). 
+
+Then select the output format (*.mat*, or binary) and the output directory. The different parts of the signal correponding to the events (or between events) will be saved : 
+
+.. figure:: /_images/signals_export_from_events_res.png
+   :align: center
+
+.. note::
+   This is similar to the *Events/Reject Events* tool, with in addition the possibility to merge and export the signal parts defined by the events
+
+

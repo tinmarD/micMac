@@ -94,6 +94,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interface/index.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html">IO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../signals/index.html">Signals</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Views</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Add a view</a></li>
@@ -184,7 +185,7 @@
 <li><strong>Position</strong> : Position of the view in the window.</li>
 </ul>
 </div></blockquote>
-<p>For frequency domain views,</p>
+<p>For frequency domain views, i.e. power spectrum representation,</p>
 <div class="figure align-center" id="id2">
 <a class="reference internal image-reference" href="../_images/view_add_view_f.png"><img alt="../_images/view_add_view_f.png" src="../_images/view_add_view_f.png" style="width: 70%;" /></a>
 <p class="caption"><span class="caption-text">frequency domain</span></p>
@@ -207,12 +208,14 @@
 <li><strong>wavelet name</strong> : name of wavelet. By default micMac uses a Complex Morlet wavelet (<em>cmor1-1.5</em>).</li>
 <li><strong>freq min</strong> : Minimum pseudo-frequency visualised frequency.</li>
 <li><strong>freq max</strong> : Maximum pseudo-frequency visualised frequency.</li>
-<li><strong>freq step</strong> : Step between two pseudo-frequencies.</li>
+<li><strong>freq step</strong> or <strong>num freqs</strong> : Step between two pseudo-frequencies OR the number of frequencies (when Log scale is on)</li>
+<li><strong>Log</strong> : If on, the frequency scale increases logarithmically.</li>
 </ul>
 </div></blockquote>
+<p>Phase views share the same parameter as the time-frequency views.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Frequency domain and time-frequency domain views do not appears on <strong>Stacked mode</strong> (visualisation mode 1).</p>
+<p class="last">Frequency domain, time-frequency, and phase domain views do not appears on <strong>Stacked mode</strong> (visualisation mode 1). Select the <strong>Spaced mode</strong> to visualise them.</p>
 </div>
 </div>
 

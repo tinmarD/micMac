@@ -19,11 +19,13 @@ Contents:
 
    getting_started/index
    interface/index
+   io/index
    signals/index
    views/index
    windows/index
    events/index
    tools/index
+   detectors/index
    
 
 

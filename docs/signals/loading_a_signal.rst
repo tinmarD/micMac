@@ -2,7 +2,7 @@
     Loading a signal
 ************************
 
-Go to **Signals>Load raw signal** to load a new signal. After selecting the file, the following window shows up :
+Go to **Signals>Load raw signal** to load a new signal or use the **Ctrl O** shortcut. After selecting the file, the following window shows up :
 
 .. figure:: /_images/signals_load_popup.png
    :align: center

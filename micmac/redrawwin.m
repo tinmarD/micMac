@@ -6,6 +6,9 @@ function ALLWIN = redrawwin(VI, ALLWIN, ALLSIG, winnb)
 if nargin==3
     winnb=find(cat(1,ALLWIN.figh)==gcbf);
 end
+if isempty(winnb)
+    return;
+end
 Win=ALLWIN(winnb);
 
 axFocusNum = [];

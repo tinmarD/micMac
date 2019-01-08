@@ -102,9 +102,10 @@ end
 
 if ~isempty(results)
     if ~isempty(userdata) && isfield(userdata,'chancorr')
-%         VI.chancorr{userdata.sigpos1,userdata.sigpos2} = userdata.chancorr;
-%         VI.chancorr{userdata.sigpos2,userdata.sigpos1} = userdata.chancorrinv;
         [VI] = addchancorr(VI, userdata.sigpos1, userdata.sigpos2, userdata.chancorr, userdata.chancorrinv);
+        for i=1:length(ALLWIN)
+        	ALLWIN = redrawwin(VI, ALLWIN, ALLSIG, i);
+        end
     end
 end
 

@@ -17,7 +17,7 @@ Parameters are:
  - **Window** : Number of the window where to add it. 
  - **Position** : Position of the view in the window.
 
-For frequency domain views,
+For frequency domain views, i.e. power spectrum representation,
 
 .. figure:: /_images/view_add_view_f.png
    :align: center
@@ -45,9 +45,13 @@ additional parameters are :
  - **wavelet name** : name of wavelet. By default micMac uses a Complex Morlet wavelet (*cmor1-1.5*).
  - **freq min** : Minimum pseudo-frequency visualised frequency.
  - **freq max** : Maximum pseudo-frequency visualised frequency.
- - **freq step** : Step between two pseudo-frequencies. 
+ - **freq step** or **num freqs** : Step between two pseudo-frequencies OR the number of frequencies (when Log scale is on) 
+ - **Log** : If on, the frequency scale increases logarithmically.
 
+Phase views share the same parameter as the time-frequency views.
 
 .. note:: 
-   Frequency domain and time-frequency domain views do not appears on **Stacked mode** (visualisation mode 1).   
+   Frequency domain, time-frequency, and phase domain views do not appears on **Stacked mode** (visualisation mode 1). Select the **Spaced mode** to visualise them.  
+
+
 

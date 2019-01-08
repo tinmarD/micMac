@@ -12,7 +12,7 @@ Before adding an event, the event type must be specified. To do this, go to **Ev
 
    Event options window
 
-Event type can be set to an existing type or set to a new type by checking the **New Type** box. The channel option allow to specify whether the event is a global, defined on all channels, or the event is channel specific.
+Event type can be set to an existing type or set to a new type by checking the **New Type** box, enter the event name and press *Enter*. The channel option allow to specify whether the event is a global, defined on all channels, or the event is channel specific.
 
 
 Adding an event

@@ -94,19 +94,28 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interface/index.html">Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html">IO</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Signals</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="loading_a_signal.html">Loading a signal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filtering.html">Filtering</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Export Data</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Export Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#export-whole-file">Export whole file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#export-from-global-events">Export from global events</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="bad_channels.html">Bad Channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eeg_channels.html">EEG Channels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modify_a_signal.html">Modify a Signal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="channel_correspondency.html">Channel Correspondency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resynch_signals.html">Signals Synchronization</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../views/index.html">Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../windows/index.html">Windows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../events/index.html">Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../detectors/index.html">Detectors</a></li>
 </ul>
 
             
@@ -174,6 +183,8 @@
             
   <div class="section" id="export-data">
 <h1>Export Data<a class="headerlink" href="#export-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="export-whole-file">
+<h2>Export whole file<a class="headerlink" href="#export-whole-file" title="Permalink to this headline">¶</a></h2>
 <p>This functionnality allows to export data from a signal in an matlab format (<em>.mat</em>).</p>
 <p>Go to <strong>Signals&gt;Export&gt;Export data</strong>. The following window appears:</p>
 <div class="figure align-center">
@@ -191,6 +202,23 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This way of exporting data allows to load them easily into <strong>Wave_clus</strong> for action potential detection and sorting.</p>
+</div>
+</div>
+<div class="section" id="export-from-global-events">
+<h2>Export from global events<a class="headerlink" href="#export-from-global-events" title="Permalink to this headline">¶</a></h2>
+<p>This menu allow you to extract or reject the signal defined by global events and export it.</p>
+<div class="figure align-center">
+<img alt="../_images/signals_export_from_events.png" src="../_images/signals_export_from_events.png" />
+</div>
+<p>Select the type of event you want to reject or select. If you need to include the events parts, check the Include checkbox. Select the signal from which the data will be extracted. Check the <em>Merge</em> button to merge all the event parts together (or the part between events).</p>
+<p>Then select the output format (<em>.mat</em>, or binary) and the output directory. The different parts of the signal correponding to the events (or between events) will be saved :</p>
+<div class="figure align-center">
+<img alt="../_images/signals_export_from_events_res.png" src="../_images/signals_export_from_events_res.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is similar to the <em>Events/Reject Events</em> tool, with in addition the possibility to merge and export the signal parts defined by the events</p>
+</div>
 </div>
 </div>
 
