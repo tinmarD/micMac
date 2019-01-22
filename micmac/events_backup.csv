@@ -1,5 +1,49 @@
 id,type,tpos,duration,channelind,channelname,sigid,sigdesc,rawparentid,centerfreq,color
-55,Artefact,107.7753,3.5831,-1,all,1,SAB ENC 7 550ms,1,NaN,0.08        0.17           1
-56,Artefact,123.958,2.1077,-1,all,1,SAB ENC 7 550ms,1,NaN,0.08        0.17           1
-57,Artefact,157.03,2.2248,-1,all,1,SAB ENC 7 550ms,1,NaN,0.08        0.17           1
-58,Artefact,143.6108,1.3349,-1,all,1,SAB ENC 7 550ms,1,NaN,0.08        0.17           1
+15,hfo-ste,11.3564,0.028809,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+4,hfo-ste,11.3638,0.035645,13,EEG B'2-B'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+25,hfo-ste,11.6094,0.022461,24,EEG TB'3-TB'4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+8,hfo-ste,12.4497,0.04248,22,EEG TB'1-TB'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+41,hfo-ste,12.7871,0.010742,87,EEG TB6-TB7,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+9,hfo-ste,13.5327,0.024414,22,EEG TB'1-TB'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+16,hfo-ste,14.5645,0.02002,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+33,hfo-ste,32.5889,0.011719,51,EEG OT'13-OT'14,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+40,hfo-ste,32.6045,0.012695,72,EEG A3-A4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+45,hfo-ste,32.6045,0.013184,101,EEG C9-C10,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+47,hfo-ste,32.6045,0.013184,108,EEG OR4-OR5,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+42,hfo-ste,32.606,0.013672,87,EEG TB6-TB7,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+48,hfo-ste,33.6108,0.015625,108,EEG OR4-OR5,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+43,hfo-ste,33.6123,0.01416,87,EEG TB6-TB7,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+46,hfo-ste,33.6123,0.015137,101,EEG C9-C10,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+37,hfo-ste,33.7734,0.016602,65,EEG OR'5-OR'14,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+26,hfo-ste,41.3535,0.054199,24,EEG TB'3-TB'4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+17,hfo-ste,41.3579,0.050293,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+2,hfo-ste,41.4106,0.024902,12,EEG B'1-B'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+38,hfo-ste,80.4189,0.022949,70,EEG A1-A2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+39,hfo-ste,80.4238,0.018066,71,EEG A2-A3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+44,hfo-ste,80.4619,0.03418,95,EEG C2-C3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+10,hfo-ste,108.332,0.02832,22,EEG TB'1-TB'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+27,hfo-ste,108.5098,0.015137,24,EEG TB'3-TB'4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+18,hfo-ste,108.5122,0.013672,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+11,hfo-ste,108.6611,0.033691,22,EEG TB'1-TB'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+19,hfo-ste,108.6611,0.040527,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+28,hfo-ste,108.6738,0.02832,24,EEG TB'3-TB'4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+20,hfo-ste,108.8843,0.025391,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+12,hfo-ste,108.8853,0.017578,22,EEG TB'1-TB'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+29,hfo-ste,108.8857,0.028809,24,EEG TB'3-TB'4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+5,hfo-ste,108.9165,0.024414,13,EEG B'2-B'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+35,hfo-ste,109.354,0.027344,53,EEG GC'2-GC'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+34,hfo-ste,109.3564,0.021484,52,EEG GC'1-GC'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+6,hfo-ste,109.4482,0.027344,13,EEG B'2-B'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+3,hfo-ste,109.4526,0.021484,12,EEG B'1-B'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+36,hfo-ste,109.5137,0.016602,54,EEG GC'3-GC'4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+30,hfo-ste,109.5356,0.021484,24,EEG TB'3-TB'4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+21,hfo-ste,110.126,0.024414,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+22,hfo-ste,124.3936,0.023438,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+23,hfo-ste,124.8618,0.02002,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+31,hfo-ste,144.0493,0.019531,24,EEG TB'3-TB'4,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+13,hfo-ste,144.0508,0.024414,22,EEG TB'1-TB'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+1,hfo-ste,157.6304,0.020508,1,EEG A'1-A'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+7,hfo-ste,158.0947,0.018555,14,EEG B'3-B'7,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+24,hfo-ste,158.0981,0.013184,23,EEG TB'2-TB'3,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+14,hfo-ste,158.1006,0.01123,22,EEG TB'1-TB'2,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1
+32,hfo-ste,169.1333,0.046387,37,EEG T'7-T'8,2,SAB ENC 7 550ms_f>80Hz,1,NaN,0.08        0.17           1

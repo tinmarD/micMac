@@ -84,19 +84,19 @@ for i=1:nElectrodeEEG
         continue;
     end
     elChanBi_i      = find(elPosBi==(elNum_i));
-    if ~isempty(elChanBi_i)
-        for j=1:length(elChanMono_i)
-            if j==1
-                chancorrMono2Bi(elChanMono_i(j),:)  = [elChanBi_i(j),elChanBi_i(j)];
-                chancorrBi2Mono(elChanBi_i(j),:)    = [elChanMono_i(j),elChanMono_i(min(j+1, length(elChanMono_i)))];
-            elseif j==length(elChanMono_i)
-                chancorrMono2Bi(elChanMono_i(j),:) = [elChanBi_i(j-1),elChanBi_i(j-1)];
-            else
-                chancorrMono2Bi(elChanMono_i(j),:) = [elChanBi_i(j-1),elChanBi_i(j)];
-                chancorrBi2Mono(elChanBi_i(j),:)   = [elChanMono_i(j),elChanMono_i(j+1)];
-            end
+    if isempty(elChanBi_i)
+        chancorrMono2Bi(elChanMono_i(j),:) = [];
+    for j=1:length(elChanMono_i)
+        if j==1
+            chancorrMono2Bi(elChanMono_i(j),:)  = [elChanBi_i(j),elChanBi_i(j)];
+            chancorrBi2Mono(elChanBi_i(j),:)    = [elChanMono_i(j),elChanMono_i(min(j+1, length(elChanMono_i)))];
+        elseif j==length(elChanMono_i)
+            chancorrMono2Bi(elChanMono_i(j),:) = [elChanBi_i(j-1),elChanBi_i(j-1)];
+        else
+            chancorrMono2Bi(elChanMono_i(j),:) = [elChanBi_i(j-1),elChanBi_i(j)];
+            chancorrBi2Mono(elChanBi_i(j),:)   = [elChanMono_i(j),elChanMono_i(j+1)];
         end
-    end
+    end       
 end
 for i=1:length(electrodeNoEEGNum);
     elNum_i = electrodeNoEEGNum(i);
