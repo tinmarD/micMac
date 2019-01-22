@@ -42,7 +42,7 @@ if ismember(1,viewpos)
     if size(ALLWIN(winnb).views,2)==1
         ALLWIN(winnb).chansel = 1;
     else
-        SigSecond = getsignal (ALLSIG, 'sigid', ALLWIN.views(2).sigid);
+        SigSecond = getsignal (ALLSIG, 'sigid', ALLWIN(winnb).views(2).sigid);
         % Do not change chansel if signals are parents, if not check for
         % correspondences
         if ~areparentsig(ALLSIG,sigid,SigSecond.id)
